@@ -1,0 +1,183 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Alata&family=Bebas+Neue&family=Bree+Serif&family=Changa:wght@200..800&family=Exo+2:ital,wght@0,100..900;1,100..900&family=Kanit:wght@300;500&family=Kdam+Thmor+Pro&family=League+Spartan:wght@100..900&family=Merriweather+Sans&family=Montserrat:wght@400;500&family=Newsreader:opsz@6..72&family=Oswald&family=Outfit:wght@100..900&family=Poppins&family=Raleway:ital,wght@1,800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Satisfy&family=Share+Tech+Mono&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*{
+  box-sizing: border-box;
+}
+body{
+  font-family: "Changa", sans-serif;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+.menu label{
+    display:flex;
+     flex-direction:column;
+     width:28px;
+     height: 30px;
+     cursor:pointer;
+     align-items: flex-end;
+   }
+   
+ .menu span{
+     background:white;
+     border-radius:10px;
+     height:3px;
+     margin: 2px 0;
+     transition: .6s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+   }
+   
+   
+  .menu span:nth-of-type(1){
+     width:50%;
+   }
+   
+  .menu span:nth-of-type(2){
+     width:100%;
+   }
+   
+   
+  .menu span:nth-of-type(3){
+     width:75%;
+    
+   }
+   
+   
+   .menu input[type="checkbox"]{
+     display:none;
+   }
+  
+   
+   
+  .menu input[type="checkbox"]:checked ~ span:nth-of-type(1){
+     transform-origin:bottom;
+     transform:rotatez(45deg) translate(-8px,10px)
+   }
+   
+   
+  .menu input[type="checkbox"]:checked ~ span:nth-of-type(2){
+     
+     transform-origin:top;
+     transform:rotatez(-45deg)
+   }
+   
+   
+   .menu input[type="checkbox"]:checked ~ span:nth-of-type(3){
+     
+     transform-origin:bottom;
+     width:50%;
+     transform: translate(-2px,-2px) rotatez(45deg);
+   
+   }
+.no-scrollbar{
+  animation: slide 15s linear infinite;
+}
+@keyframes slide {
+  0%   { transform: translate(0, 0); }
+  100% { transform: translate(-100%, 0); }
+}
+
+
+.ts{
+  font-size: 11px;
+}
+.checkcontainer{
+  position: relative;
+  display: block;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.checkcontainer input {
+  display: none;
+}
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: rgb(247, 247, 247);
+  border: 1px solid black;
+  border-radius: 3px;
+}
+
+.checkcontainer input:checked ~ .checkmark {
+  background-color: rgb(16, 15, 15);
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+.checkcontainer input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.checkcontainer .checkmark:after {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  top: 0;
+  width: 6px;
+  height: 11px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+
+
+
+
+
+.five-pointed-star {
+  --star-color:#dee5e8;
+  margin:1em auto;
+  font-size:.5em;
+  position: relative;
+  display: block;
+  width: 0px;
+  height: 0px;
+  border-right: 1em solid transparent;
+  border-bottom: 0.7em solid var(--star-color);
+  border-left: 1em solid transparent;
+  transform: rotate(35deg);
+ }
+ .five-pointed-star:before {
+  border-bottom: 0.8em solid var(--star-color);
+  border-left: 0.3em solid transparent;
+  border-right: 0.3em solid transparent;
+  position: absolute;
+  height: 0;
+  width: 0;
+  top: -0.45em;
+  left: -0.65em;
+  display: block;
+  content:"";
+  transform: rotate(-35deg);
+ }
+ .five-pointed-star:after {
+  position: absolute;
+  display: block;
+  top: 0.03em;
+  left: -1.05em;
+  width: 0;
+  height: 0;
+  border-right: 1em solid transparent;
+  border-bottom: 0.7em solid var(--star-color);
+  border-left: 1em solid transparent;
+  transform: rotate(-70deg);
+  content:"";
+ }
+
