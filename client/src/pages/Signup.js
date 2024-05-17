@@ -8,7 +8,7 @@ import { Envelop } from '../components/Svg';
 const axiosInstance = axios.create({
     baseURL: 'http://172.20.10.9:8000', 
     headers: {
-      'Content-Type': 'application/json', 
+      'Content-Type': 'application/json',
     }
   })
 function Signup() {
@@ -126,6 +126,17 @@ function Signup() {
         }
     };
 
+    const handleResendLink = async()=>{
+        try{
+            const response = await axiosInstance.post('/resend-email-verification', { email: formData.email });
+
+            console.log(response.data.message)
+            
+        }catch(error){
+           console.error(error)
+        }
+    }
+
     return (
         <div className='grid place-items-center h-full'>
             <div className='bg-gray-100 shadow-md shadow-gray-300 text-black text-xl font-bold w-full h-9 lg:h-14 lg:text-2xl grid place-content-center mb-5'>Sign Up</div>
@@ -188,15 +199,23 @@ function Signup() {
                             <button type='submit' className='w-full bg-stone-900 hover:bg-stone-800 text-white font-medium text-md my-3 h-10 md:h-12 md:mt-5 rounded-md shadow-sm shadow-gray-600'>SIGN UP</button>
                         </form>
                     </div>
-                    <div ref={verifyRef} className='hidden '>
-                        <Envelop w='70' h='75' fillColor='green'/>
-                        <h2 className='text-center'>Please verify your email</h2>
-                        <p className='text-center'>You are almost there! we sent an email to</p>
-                        <p className='text-center'>{formData.email}</p>
+                    <div ref={verifyRef} className=' px-2 hidden'>
+                        <div className='w-full flex justify-center mt-16'>
+                            <Envelop w='50' h='35' fillColor='green'/>
+                        </div>
+                        <h2 className='text-center font-semibold text-lg'>Please verify your email</h2>
+                        <p className='text-center md:text-lg'>You are almost there! we sent an email to</p>
+                        <p className='text-center text-black font-semibold  md:text-lg'>{formData.email}</p>
+                        <p className='text-center  md:text-lg'>Click on the link in that email to complete your signup. if you don't see it, you may need to <b>check your spam</b> folder</p>
+                        <div className='w-full flex justify-center mt-4'>
+                            <button onClick={handleResendLink} className=' md:text-lg rounded-md w-8/12 h-10 flex items-center justify-center hover:bg-stone-800 bg-stone-900 text-white'>
+                                Resend Verifcation Email
+                            </button>
+                        </div>
                     </div>
                 </div>
-                <div className='text-center py-10'>
-                    <div className='relative my-5 mx-auto max-w-xs'>
+                <div className='text-center py-5'>
+                    <div className='relative mx-auto max-w-xs'>
                         <div className='absolute inset-0 flex items-center'>
                             <div className='w-full border-t border-gray-300'></div>
                         </div>
