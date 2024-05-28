@@ -1,5 +1,5 @@
 import React from 'react'
-import { Fivestar, Fourstar, Quote, ShowDown, ShowUp } from './Svg'
+import { Fivestar, Fourstar, Quote, ShowDown, ShowUp, Verified } from './Svg'
 import profilepic1 from '../assets/images/paul cregs.jpg'
 import profilepic2 from '../assets/images/sarah deke.jpg'
 import profilepic3 from '../assets/images/martha cynthia.jpg'
@@ -27,7 +27,7 @@ function Testimonies() {
             <p className='lg:text-lg'>We're not just about selling shoes, we love to hear from our customers</p>
         </div>
         <div className='flex flex-col justify-evenly py-4 md:flex-row'>
-            <div className='w-full py-4 lg:px-6 px-2 bg-white'>
+            <div className='w-full py-4 lg:px-6 px-2 bg-white grid'>
                 <Quote fillColor='#111111' h='20' w='20' styleProp='scale-y-[-1] scale-x-[-1]'/>
                 <blockquote className=' text-gray-500 lg:text-lg'>
                   I've been a loyal customer of Shoe Haven for years, and I can confidently say that their quality is unmatched. Every pair I've owned has been durable, comfortable, and stylish. I wouldn't shop anywhere else for my footwear needs.
@@ -39,11 +39,12 @@ function Testimonies() {
                         <img src={profilepic1} alt="profile" className="object-cover h-full w-full"/>
                     </div>
                     <p className='text-md'>Paul Cregs</p>
+                    <Verified fillColor='blue' styleProp="w-3 ml-2"/>
                     </div>
                     <Fivestar styleProp="flex" widthSize="10"/>
                 </div>
             </div>
-            <div className='w-full py-4 lg:px-6 px-2 bg-white my-3 md:my-0 md:mx-3'>
+            <div className='w-full py-4 lg:px-6 px-2 bg-white my-3 md:my-0 md:mx-3 grid'>
                 <Quote fillColor='#111111' h='20' w='20' styleProp='scale-y-[-1] scale-x-[-1]'/>
                 <blockquote className=' text-gray-500 lg:text-lg'>
                    I recently purchased a pair of shoes from Shoe Haven, and I couldn't be happier with my decision. Not only do they look fantastic, but they're also incredibly comfortable. I've received so many compliments whenever I wear them. Definitely recommend!  
@@ -55,6 +56,7 @@ function Testimonies() {
                         <img src={profilepic2} alt="profile" className="object-cover h-full w-full"/>
                     </div>
                     <p className='text-md'>Sarah Duke</p>
+                    <Verified fillColor='blue' styleProp="w-3 ml-2"/>
                     </div>
                     <Fourstar styleProp="flex" widthSize="10"/>
                 </div>
@@ -71,6 +73,7 @@ function Testimonies() {
                         <img src={profilepic3} alt="profile" className="object-cover h-full w-full"/>
                     </div>
                     <p className='text-md'>Martha Cynthia</p>
+                    <Verified fillColor='blue' styleProp="w-3 ml-2"/>
                     </div>
                     <Fivestar styleProp="flex" widthSize="10"/>
                 </div>

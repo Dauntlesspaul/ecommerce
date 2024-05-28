@@ -77,16 +77,16 @@ function SearchResults() {
     <div className='w-full flex flex-wrap justify-start '>
       {searchResults.length > 0 ? searchResults.map((result, index) => (
          <div key={index} className=" h-fit m-2">
-            <div className=" xl:w-56 xl:h-64 lg:w-48 lg:h-56 w-40 h-48 bg-neutral-100 p-1 relative hover:p-1.5">
+            <div className=" xl:w-56 xl:h-64 lg:w-48 lg:h-56 w-40 h-48 bg-neutral-100 p-1 relative hover:p-0 hover:border hover:border-neutral-300">
               <div className="w-7 h-5 xl:w-11 xl:h-9 bg-red-600 flex justify-center items-center absolute">
                 <h5 className="text-white xl:text-xs font-bold text-[0.55rem]">-{((result.price-result.discountprice)*100/result.price).toFixed(0)}%</h5>
               </div>
               <Link to={`/men/products/${result.brand.replace(/[\s]/, '-')}`}>
                 <img className="xl:h-56 lg:h-48 w-full h-40 z-0" src={result.imageurl} alt="" />
               </Link>
-              <button className="bg-neutral-100 hover:bg-neutral-200 w-full h-7 flex justify-center items-center" onClick={() => addToCart({ brand: result.brand, units: result.units, rating: result.rating, discountprice: result.discountprice, imgurl: result.imageurl, size: [38, 40, 41, 43, 44, 45, 46, 47], sizeIdex: 0 })}>
+              <button className="bg-neutral-100 hover:bg-neutral-200 w-full h-8 flex justify-center items-center" onClick={() => addToCart({ brand: result.brand, units: result.units, rating: result.rating, discountprice: result.discountprice, imgurl: result.imageurl, size: [38, 40, 41, 43, 44, 45, 46, 47], sizeIdex: 0 })}>
                 <Cartsvg width="w-5" />
-                <span className="text-sm font-semibold text-red-600 ml-1">Add to cart</span>
+                <span className="text-md font-semibold text-red-600 ml-1">Add to cart</span>
               </button>
             </div>
             <h2 className="text-black lg:text-lg text-sm font-semibold">{result.brand.split(' ').map(capitalize => capitalize[0].toUpperCase() + capitalize.slice(1)).join(' ')}</h2>

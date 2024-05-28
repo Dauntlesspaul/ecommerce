@@ -10,7 +10,7 @@ app.use(express.json())
 app.use(bodyParser.json());
 const crossOrigins = [
   'http://localhost:3000',
-  'http://172.20.10.9:3000'
+  'http://172.20.10.13:3000'
 ]
 const corsOptions = {
   origin: crossOrigins ,
@@ -25,7 +25,3 @@ app.listen(PORT, ()=>{
 })
 
 
-
-/*Name	Green Okuneva
-Username	green.okuneva58@ethereal.email
-Password	A3fQ4mKzVn23TWwpc9*/

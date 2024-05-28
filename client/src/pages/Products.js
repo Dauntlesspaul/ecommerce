@@ -19,7 +19,7 @@ import ProductSkeleton from '../components/ProductSkeleton';
 import CustomSkeleton from '../components/CustomSkeleton';
 library.add(faArrowLeft, faPenToSquare, faBan)
 const axiosInstance = axios.create({
-    baseURL: 'http://172.20.10.9:8000',
+    baseURL: 'http://172.20.10.13:8000',
     timeout: 30000,
 });
 

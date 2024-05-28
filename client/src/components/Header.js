@@ -39,7 +39,7 @@ const handleCurtain = () => {
 
   return (<>
   <div className='w-full relative'>
-    <div className="w-full h-14 lg:h-16  py-2 px-2 lg:px-40 box-border flex items-center  bg-stone-900">
+    <div className="w-full h-14 py-2 px-2 lg:px-40 box-border flex items-center  bg-stone-900">
         <div className="flex justify-between items-center w-full">
         <Link to="/"><h1 className="text-white font-bold lg:text-2xl text-xl">SHOE HAVEN</h1></Link>
          <nav>

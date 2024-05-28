@@ -269,7 +269,7 @@ router.post('/resend-email-verification', async (req, res) => {
     const { email } = req.body;
     let user = await User.findOne({ email: email });
 
-    if (user) {
+    if (user && !user.verified) {
       await Token.updateOne({ userId: user._id, token: randomToken() });
       const token = await Token.findOne({ userId: user._id });
       const url = `${process.env.BASE_URL}users/${user._id}/verify/${token.token}`;
@@ -279,7 +279,7 @@ router.post('/resend-email-verification', async (req, res) => {
       return res.status(201).send({ message: 'A verification link was sent to your email, please click on the link to verify your email' });
     }
 
-    return res.status(404).send({ message: "User not found!" });
+    return res.status(404).send({ message: "User already verified" });
   } catch (error) {
     console.log(error);
     return res.status(500).send('Internal Server Error');
@@ -307,6 +307,26 @@ router.post('/signin-with-google', async (req, res) => {
   return res.status(201).send('User created');
 });
 
+router.post('/sign-in', async(req,res)=>{
+  try{
+    const {email, password} = req.body
+    console.log(req.body)
+    const user = await User.findOne({email: email})
+    console.log(user)
+    if(user){
+      const match = await bcrypt.compare(password, user.password)
+      if(match){
+        return res.status(200).send({message: "access granted"})
+      }else{
+        return res.status(404).send({messgae: "User not found!"})
+      }
+    }
+    return res.status(404).send({messgae: "User not found!"})
+  }catch(error){
+    return res.status(404).send({messgae: "User not found!"})
+  }
+
+})
 router.get('/:id/verify/:token', async (req, res) => {
   try {
     const user = await User.findOne({ _id: req.params.id });
@@ -319,7 +339,7 @@ router.get('/:id/verify/:token', async (req, res) => {
     });
 
     if (!token) {
-      return res.status(400).send({ message: 'Oops, invalid link! Token not found' });
+      return res.status(500).send('Internal Server Error');
     }
     await User.updateOne({ _id: user._id, verified: true });
     await Token.deleteOne({ _id: token._id });

@@ -67,12 +67,12 @@ function Footer() {
       </ul>
     </div>
     <div className='h-max w-max'>
-      <h2 className='text-red-600'>Popular products</h2>
+      <h2 className='text-red-600'>Popular Products</h2>
         <ul className='text-white '>
           <li>Giuseppe Zanotti</li>
           <li>Versace</li>
           <li>Prada</li>
-          <li>Brougue</li>
+          <li>Brogue</li>
       </ul>
     </div>
     </div>
