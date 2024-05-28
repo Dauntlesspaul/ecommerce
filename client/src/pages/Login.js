@@ -11,13 +11,20 @@ import { useNavigate, Link} from 'react-router-dom'
 library.add(faUser, faUser)
 
 const axiosInstance = axios.create({
-    baseURL: 'http://172.20.10.9:8000', 
+    baseURL: 'http://172.20.10.13:8000', 
+    headers: {
+        'Content-Type': 'application/json',
+      },
 })
 
 function Login() {
     const navigate = useNavigate();
     const hideShowRef = useRef(null);
     const [checked, setChecked] = useState(false);
+    const [formData, setFormData] = useState({
+        email: '',
+        password: ''
+    })
 
     const login = useGoogleLogin({
         onSuccess: async (response) => {
@@ -44,7 +51,14 @@ function Login() {
             }
         }
     });
-
+    
+    const handleChange = (event)=>{
+        const {name, value} = event.target
+        setFormData({
+            ...formData,
+            [name]: value
+        })
+    }
     const hidePassword = () => {
         setChecked(prevChecked => {
             const updatedChecked = !prevChecked;
@@ -56,8 +70,21 @@ function Login() {
             return updatedChecked;
         });
     };
-    const handleSubmit = (event) =>{
+    const handleSubmit = async(event)=>{
+        try{
+           const formDataObject = new FormData()
+           formDataObject.append('email', formData.email)
+           formDataObject.append('password', formData.password)
         event.preventDefault()
+        const response = await axiosInstance.post('/sign-in', formDataObject)
+        if(response.data.message === 'access granted'){
+            navigate('/profile')
+        }else{
+
+        }
+        }catch(error){
+            console.log(error)
+        }
     }
 
     return (
@@ -76,8 +103,9 @@ function Login() {
                             </span>
                             <input
                                 type='text'
-                                name='username'
-                                id='name'
+                                name='email'
+                                id='email'
+                                onChange={handleChange}
                                 placeholder='EMAIL ID'
                                 className='focus:outline outline-black outline-[1px] h-full md:h-12 w-full rounded-none  md:text-lg px-2'
                             />
@@ -88,8 +116,9 @@ function Login() {
                             </span>
                             <input
                                 type='password'
-                                name='pasword'
+                                name='password'
                                 ref={hideShowRef}
+                                onChange={handleChange}
                                 placeholder='PASSWORD'
                                 className='focus:outline outline-black outline-[1px] md:h-12 h-full w-full rounded-none  md:text-lg px-2 ml-1'
                             />
@@ -109,7 +138,12 @@ function Login() {
                         <div className='md:my-6 w-full my-4'>
                             <span className='float-right md:text-lg text-sm font-medium'>Forget password?</span>
                         </div>
-                        <button type='submit' className='w-full bg-stone-900 hover:bg-stone-800 text-white font-medium text-md my-3 h-10 md:h-12 md:mt-5 rounded-md shadow-sm shadow-gray-600'>LOGIN</button>
+                        <button 
+                        type='submit' 
+                        className='w-full bg-stone-900 hover:bg-stone-800 text-white font-medium text-md my-3 h-10 md:h-12 md:mt-5 rounded-md shadow-sm shadow-gray-600'
+                        >
+                            LOGIN
+                        </button>
                     </form>
                 </div>
                 <div className="text-center">

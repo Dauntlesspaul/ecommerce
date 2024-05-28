@@ -3,14 +3,18 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import googleIcon from '../assets/images/google.png';
 import { Link } from 'react-router-dom';
-import axios from 'axios'
+import axios from 'axios';
 import { Envelop } from '../components/Svg';
+import CircularIndeterminate from '../components/Loader';
+import { Eye, EyeOff } from '../components/Svg';
+
 const axiosInstance = axios.create({
-    baseURL: 'http://172.20.10.9:8000', 
+    baseURL: 'http://172.20.10.13:8000', 
     headers: {
-      'Content-Type': 'application/json',
+        'Content-Type': 'application/json',
     }
-  })
+});
+
 function Signup() {
     const [formData, setFormData] = useState({
         firstname: '',
@@ -26,8 +30,12 @@ function Signup() {
         password: ''
     });
 
-   const formRef = useRef()
-   const verifyRef = useRef()
+    const [isLoading, setLoading] = useState(false);
+    const [checked, setChecked] = useState(false);
+
+    const formRef = useRef();
+    const verifyRef = useRef();
+    const hideShowRef = useRef(null);
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -38,9 +46,20 @@ function Signup() {
 
         validateField(name, value);
     };
+    const hidePassword = () => {
+        setChecked(prevChecked => {
+            const updatedChecked = !prevChecked;
+            if (updatedChecked) {
+                hideShowRef.current.type = 'text';
+            } else {
+                hideShowRef.current.type = 'password';
+            }
+            return updatedChecked;
+        });
+    };
 
     const validateField = (fieldName, value) => {
-        const nameRegex = /^[a-zA-Z]{2,}$/;
+        const nameRegex = /^[a-zA-Z]{2,}\s*$/;
         const emailRegex = /^[a-zA-Z0-9_%-]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,}$/;
         const passwordRegex = /^[a-zA-Z0-9!@#$%*]{6,}$/;
 
@@ -68,8 +87,7 @@ function Signup() {
         }
     };
 
-
-    const handleSubmit = async(event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
 
         const nameRegex = /\S+/;
@@ -105,35 +123,38 @@ function Signup() {
         setErrors(newErrors);
 
         const hasNoErrors = Object.values(newErrors).every(error => error === '');
-        
+
         if (hasNoErrors) {
+            setLoading(true);
             const formDataObject = new FormData();
-            formDataObject.append('firstname', formData.firstname)
-            formDataObject.append('lastname', formData.lastname)
-            formDataObject.append('email', formData.email)
-            formDataObject.append('password', formData.password)
-            try{
-                const response = await axiosInstance.post('/signup', formDataObject)
-                console.log(response.data.message)
-                formRef.current.style.display ='none'
-                verifyRef.current.style.display ='block'
-                
-            }catch(error){
-               console.error(error)
-               newErrors = {...newErrors, email: error.response.data.message}
-               setErrors(newErrors)
+            formDataObject.append('firstname', formData.firstname.replace(/\s/g, ''));
+            formDataObject.append('lastname', formData.lastname.replace(/\s/g, ''));
+            formDataObject.append('email', formData.email);
+            formDataObject.append('password', formData.password);
+            try {
+                const response = await axiosInstance.post('/signup', formDataObject);
+                setLoading(false);
+                console.log(response.data.message);
+                formRef.current.style.display = 'none';
+                verifyRef.current.style.display = 'block';
+            } catch (error) {
+                console.error(error);
+                setLoading(false);
+                newErrors = { ...newErrors, email: error.response.data.message };
+                setErrors(newErrors);
             }
         }
     };
 
-    const handleResendLink = async()=>{
-        try{
+    const handleResendLink = async () => {
+        try {
+            setLoading(true);
             const response = await axiosInstance.post('/resend-email-verification', { email: formData.email });
-
-            console.log(response.data.message)
-            
-        }catch(error){
-           console.error(error)
+            setLoading(false);
+            console.log(response.data.message);
+        } catch (error) {
+            console.error(error);
+            setLoading(false);
         }
     }
 
@@ -184,32 +205,55 @@ function Signup() {
                                 />
                             </label>
                             <span className='text-red-500 text-sm'>{errors.email}</span>
-                            <label className='block max-w-full' htmlFor='password'>
+                            <label className='max-w-full flex items-center' htmlFor='password'>
                                 <input
                                     type='password'
                                     id='password'
                                     name='password'
                                     value={formData.password}
+                                    ref={hideShowRef}
                                     onChange={handleChange}
                                     placeholder='PASSWORD'
                                     className='rounded-none focus:outline outline-black outline-[1px] md:h-11 md:text-lg px-2 h-9 w-full'
                                 />
+                                <label htmlFor='view'>
+                                <input
+                                    type='checkbox'
+                                    name='view'
+                                    id='view'
+                                    checked={checked}
+                                    onChange={hidePassword}
+                                    className='hidden '
+                                />
+                                {!checked ? <span className='-ml-12 w-12 md:h-11 h-9 bg-white flex justify-center items-center'><Eye fillColor="gray"/></span> 
+                                : <span className='-ml-12 w-12 h-9 md:h-11 bg-white flex justify-center items-center'><EyeOff fillColor="gray" widthSize="cursor-pointer" /></span>}
+                            </label>
                             </label>
                             <span className='text-red-500 text-sm'>{errors.password}</span>
-                            <button type='submit' className='w-full bg-stone-900 hover:bg-stone-800 text-white font-medium text-md my-3 h-10 md:h-12 md:mt-5 rounded-md shadow-sm shadow-gray-600'>SIGN UP</button>
+                            <button 
+                                type='submit' 
+                                className='w-full bg-stone-900 hover:bg-stone-800 text-white font-medium text-md my-3 h-10 md:h-12 md:mt-5 rounded-md shadow-sm shadow-gray-600 flex justify-center items-center'
+                                disabled={isLoading}
+                            >
+                                {isLoading ? <CircularIndeterminate/> : <>SIGN UP</>}
+                            </button>
                         </form>
                     </div>
-                    <div ref={verifyRef} className=' px-2 hidden'>
+                    <div ref={verifyRef} className='px-2 hidden'>
                         <div className='w-full flex justify-center mt-16'>
                             <Envelop w='50' h='35' fillColor='green'/>
                         </div>
                         <h2 className='text-center font-semibold text-lg'>Please verify your email</h2>
-                        <p className='text-center md:text-lg'>You are almost there! we sent an email to</p>
-                        <p className='text-center text-black font-semibold  md:text-lg'>{formData.email}</p>
-                        <p className='text-center  md:text-lg'>Click on the link in that email to complete your signup. if you don't see it, you may need to <b>check your spam</b> folder</p>
+                        <p className='text-center md:text-lg'>You are almost there! We sent an email to</p>
+                        <p className='text-center text-black font-semibold md:text-lg'>{formData.email}</p>
+                        <p className='text-center md:text-lg'>Click on the link in that email to complete your signup. If you don't see it, you may need to <b>check your spam</b> folder</p>
                         <div className='w-full flex justify-center mt-4'>
-                            <button onClick={handleResendLink} className=' md:text-lg rounded-md w-8/12 h-10 flex items-center justify-center hover:bg-stone-800 bg-stone-900 text-white'>
-                                Resend Verifcation Email
+                            <button 
+                                onClick={handleResendLink} 
+                                className='md:text-lg rounded-md w-8/12 h-10 flex items-center justify-center hover:bg-stone-800 bg-stone-900 text-white'
+                                disabled={isLoading}
+                            >
+                                {isLoading ? <CircularIndeterminate/> : <>Resend Verification Email</>}
                             </button>
                         </div>
                     </div>
@@ -224,11 +268,16 @@ function Signup() {
                         </div>
                     </div>
                 </div>
-                <button className='flex justify-center items-center w-full shadow-md shadow-gray-400 hover:bg-gray-300 md:h-12 bg-gray-200 text-black font-medium text-md my-1 h-10 rounded-md'><span className='mr-2'><img className='w-5' src={googleIcon} alt='google icon' /></span>Sign in with Google </button>
-                <div className='flex justify-center w-full text-md mb-5'><span className='md:text-lg text-black font-normal mr-3'>Already have an account ?</span><span className='md:text-lg text-black font-semibold'><Link to='/login'>Login</Link></span></div>
+                <button className='flex justify-center items-center w-full shadow-md shadow-gray-400 hover:bg-gray-300 md:h-12 bg-gray-200 text-black font-medium text-md my-1 h-10 rounded-md'>
+                    <span className='mr-2'><img className='w-5' src={googleIcon} alt='google icon' /></span>Sign in with Google 
+                </button>
+                <div className='flex justify-center w-full text-md mb-5'>
+                    <span className='md:text-lg text-black font-normal mr-3'>Already have an account?</span>
+                    <span className='md:text-lg text-black font-semibold'><Link to='/login'>Login</Link></span>
+                </div>
             </div>
         </div>
     );
 }
 
-export default Signup
+export default Signup;
