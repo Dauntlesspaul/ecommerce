@@ -20,4 +20,14 @@ async function main(user, subject, text ) {
   });
 }
 
-module.exports = main;
+async function mainHTML(user, subject, html) {
+  const info = await transporter.sendMail({
+    from: `"Shoe Haven" <${process.env.GMAIL_USER}>`, 
+    to: user, 
+    subject: subject, 
+    html: html,  
+  });
+  console.log('Email sent:', info.messageId);
+}
+
+module.exports = {main, mainHTML};

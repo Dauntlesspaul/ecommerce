@@ -1,40 +1,42 @@
-import React from 'react'
-import {useState} from 'react'
+import React, { useState, useEffect } from 'react';
 
-function SearchInput({onSearch, formClass, inputClass, buttonStyle, content}) {
-    
- const [searchInput, setSearchInput] = useState('')
- const handleSearchInput = (event) =>{
-    const {value} = event.target
-    setSearchInput(value)
- }
-const  handleSubmit = (event)=>{
+const SearchInput = ({ onSearch, initialValue = '', formClass, inputClass, buttonStyle, content }) => {
+  const [searchInput, setSearchInput] = useState(initialValue);
+
+  useEffect(() => {
+    setSearchInput(initialValue);
+  }, [initialValue]);
+
+  const handleSearchInput = (event) => {
+    const { value } = event.target;
+    setSearchInput(value);
+  };
+
+  const handleSubmit = (event) => {
     event.preventDefault();
-    onSearch(searchInput)
- }
-
+    onSearch(searchInput);
+  };
 
   return (
     <div className="mt-1  box-border flex justify-center w-full">
-        <form onSubmit={handleSubmit} className={formClass}>
-          <fieldset className='flex'>
-          <label htmlFor='search'/>
-          <input 
-          id='search'
-          name='search'
-          value={searchInput}
-          onChange={handleSearchInput}
-          className={inputClass}
-          type='text'
-          placeholder='Search by Category or by Brand'
-          />
-          <button className={buttonStyle} >
-           {content}
-          </button>
-          </fieldset>
-        </form>
-      </div>
+    <form onSubmit={handleSubmit} className={formClass}>
+    <fieldset className='flex'>
+    <label htmlFor='search'/>
+      <input
+        type="text"
+        value={searchInput}
+        onChange={handleSearchInput}
+        className={inputClass}
+        required
+        placeholder='Search by Category or by Brand'
+      />
+      <button type="submit" className={buttonStyle}>
+        {content}
+      </button>
+      </fieldset>
+    </form>
+    </div>
   )
-}
+};
 
-export default SearchInput
+export default SearchInput;
