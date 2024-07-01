@@ -1,18 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import createAxiosInstance from '../components/axiosInstance';
+import { useParams, useNavigate } from 'react-router-dom';
 import { Error, Success } from '../components/Svg';
+import { Button } from '@mui/material';
 
-const axiosInstance = axios.create({
-  baseURL: 'http://172.20.10.13:8000',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-});
+const axiosInstance = createAxiosInstance()
 
 function EmailVerification() {
   const { id, token } = useParams();
   const [message, setMessage] = useState();
+  const navigate = useNavigate()
 
   useEffect(() => {
     const verifyEmail = async () => {
@@ -29,18 +26,30 @@ function EmailVerification() {
   }, [id, token]);
 
   return (
-    <div className='bg-zinc-950 min-h-screen min-w-full grid place-items-center'>
-      <div className='bg-gray-100 w-10/12 md:w-[550px] h-72 flex items-center justify-center'>
-        <div className='space-y-7 grid place-items-center h-fit'>
+    <div className=' z-40 w-full h-dvh grid place-items-center fixed top-0 bottom-0 bg-slate-50'>
+      <div className='bg-white lg:w-[700px] grid place-items-center shadow-md w-11/12 h-[50%]'>
+        <div className='h-fit w-fit grid place-items-center lg:px-5 px-2 text-sm md:text-base'>
           {message && message === 'Oops, invalid link! Token not found' ? (
             <>
-              <Error w='70' h='75' fillColor='red' />
-              <span>{message}</span>
+             {message && <> <Error w='60' h='65' fillColor='red' />
+              <span className='my-2'>{message}</span></>}
+            
             </>
           ) : (
             <>
-              {message && <Success w='70' h='75' fillColor='green' />}
-              <span>{message}</span>
+              {message && <> <Success w='60' h='65' fillColor='green' />
+              <span className='my-2'>{message}</span>
+              <div className='w-full flex justify-center mt-2'>
+                <Button
+                variant='contained'
+                color='success'
+                onClick={()=> navigate('/login')}
+                >
+                  Proceed to Login
+                </Button>
+               </div> 
+               </>
+}
             </>
           )}
         </div>

@@ -31,13 +31,17 @@ section:{
     required:true
 },
 rating: {
-    type: String,
+    type: Number,
     required: true
  },
  description: {
     type: String,
     required: true
  },
+ comments: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Comment'
+  }],
  createdAt: {
     type: Date,
     default: Date.now

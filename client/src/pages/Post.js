@@ -4,7 +4,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import CircularIndeterminate from '../components/Loader';
 const axiosInstance = axios.create({
-  baseURL: 'http://172.20.10.9:8000', 
+  baseURL: 'http://172.20.10.14:8000', 
   headers: {
     'Content-Type': 'multipart/form-data', 
   }
