@@ -29,8 +29,7 @@ app.use(express.urlencoded({extended:true}));
 app.use(express.json())
 app.use(bodyParser.json());
 const crossOrigins = [
-  'http://localhost:3000',
-  'http://172.20.10.14:3000'
+  'http://shoe-haven.vercel.app',
 ]
 const corsOptions = {
   origin: crossOrigins,
