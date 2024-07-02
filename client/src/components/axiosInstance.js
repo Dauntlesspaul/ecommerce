@@ -5,7 +5,7 @@ const createAxiosInstance = () => {
 
 
   return axios.create({
-    baseURL: sho-haven-api.vercel.app,
+    baseURL: "https://sho-haven-api.vercel.app",
     withCredentials: true,
     headers: {
       'Content-Type': 'application/json',
