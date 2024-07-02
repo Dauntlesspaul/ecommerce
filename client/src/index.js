@@ -32,7 +32,7 @@ import ForgotPassword from './pages/ForgotPassword.js';
 import ChangePassword from './pages/ChangePassword.js';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <GoogleOAuthProvider clientId="309719589701-kj23qdj87udopfa87o1dpojlntpucdj3.apps.googleusercontent.com">
+  <GoogleOAuthProvider clientId="357898211538-58erlvikuvbve56io6hgg1apgtqqm04g.apps.googleusercontent.com">
     <SkeletonTheme baseColor='#dee5e8' highlightColor='#fcfdfd'>
     <BrowserRouter>
     <ScrollToTop />
