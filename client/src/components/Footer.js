@@ -95,7 +95,7 @@ function Footer({toast, soundSuccess}) {
    <div className='w-full flex justify-between max-w-[500px] lg:max-w-full xl:w-[1000px] lg:w-[800px]'>
      <div className='lg:flex lg:w-[350px] xl:w-[410px] lg:justify-between '>
     <div className='h-max w-max'>
-      <h2 className='text-white  md:text-base text-sm  '>Information</h2>
+      <h2 className='text-white  md:text-base text-sm '>Information</h2>
       <ul className='text-[gray] md:text-base text-sm space-y-2'>
         <li>My Account</li>
         <li className='hover:text-white'>About Us</li>
@@ -106,7 +106,7 @@ function Footer({toast, soundSuccess}) {
         <li className='hover:text-white'>Refer to get Discount</li>
       </ul>
     </div>
-    <div className='h-max w-max'>
+    <div className='h-max w-max mt-2'>
       <h2 className='text-white md:text-base text-sm  '>Popular Products</h2>
         <ul className='text-[gray] space-y-2 md:text-base text-sm '>
           <li className='hover:text-white'>Giuseppe Zanotti</li>
@@ -126,7 +126,7 @@ function Footer({toast, soundSuccess}) {
       </ul>
       </div>
     <div className='h-max w-max'>
-      <h2 className='text-white md:text-base text-sm '>Customer Services</h2>
+      <h2 className='text-white md:text-base text-sm mt-2 '>Customer Services</h2>
         <ul className='text-[gray] md:text-base text-sm space-y-2 '>
           <li className='hover:text-white'>Help Center</li>
           <li className='hover:text-white'>Chat With Us</li>
