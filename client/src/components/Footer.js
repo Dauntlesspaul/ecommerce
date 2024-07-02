@@ -95,7 +95,7 @@ function Footer({toast, soundSuccess}) {
    <div className='w-full flex justify-between max-w-[500px] lg:max-w-full xl:w-[1000px] lg:w-[800px]'>
      <div className='lg:flex lg:w-[350px] xl:w-[410px] lg:justify-between '>
     <div className='h-max w-max'>
-      <h2 className='text-white  '>Information</h2>
+      <h2 className='text-white  md:text-base text-sm  '>Information</h2>
       <ul className='text-[gray] md:text-base text-sm space-y-2'>
         <li>My Account</li>
         <li className='hover:text-white'>About Us</li>
@@ -107,7 +107,7 @@ function Footer({toast, soundSuccess}) {
       </ul>
     </div>
     <div className='h-max w-max'>
-      <h2 className='text-white '>Popular Products</h2>
+      <h2 className='text-white md:text-base text-sm  '>Popular Products</h2>
         <ul className='text-[gray] space-y-2 md:text-base text-sm '>
           <li className='hover:text-white'>Giuseppe Zanotti</li>
           <li className='hover:text-white'>Versace</li>
@@ -118,7 +118,7 @@ function Footer({toast, soundSuccess}) {
     </div>
     <div className='lg:flex lg:w-[350px] xl:w-[410px] lg:justify-between'>
     <div className=' h-max w-max'>
-      <h2 className='text-white '>Categories</h2>
+      <h2 className='text-white md:text-base text-sm '>Categories</h2>
       <ul className=' text-[gray] space-y-2 md:text-base text-sm '>
         <li className='hover:text-white'>Men</li>
         <li className='hover:text-white'>Women</li>
@@ -126,7 +126,7 @@ function Footer({toast, soundSuccess}) {
       </ul>
       </div>
     <div className='h-max w-max'>
-      <h2 className='text-white '>Customer Services</h2>
+      <h2 className='text-white md:text-base text-sm '>Customer Services</h2>
         <ul className='text-[gray] md:text-base text-sm space-y-2 '>
           <li className='hover:text-white'>Help Center</li>
           <li className='hover:text-white'>Chat With Us</li>
@@ -139,11 +139,11 @@ function Footer({toast, soundSuccess}) {
     <div className='lg:w-full lg:flex lg:justify-center'>
     <div className='lg:max-w-full xl:w-[1000px] lg:w-[800px] md:flex justify-between max-w-[500px]'>
     <div className='mt-3'>
-      <h2 className='text-white mb-1 '>Follow Us</h2>
+      <h2 className='text-white mb-1 md:text-base text-sm '>Follow Us</h2>
       <Follow/>
     </div>
     <div className='mt-3'>
-      <h2 className='text-white mb-1 '>Payment Methods</h2>
+      <h2 className='text-white mb-1 md:text-base text-sm '>Payment Methods</h2>
       <Paymentsys/>
     </div>
     </div>

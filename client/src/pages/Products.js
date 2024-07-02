@@ -43,6 +43,7 @@ const Products = () => {
   const navigate = useNavigate()
   const [include, setInclude] = useState(false)
   const [value, setValue] = useState(1)
+  const [verifiedBuyer, setVerifiedBuyer] = useState(false)
   const [text, setText] = useState('')
   const [comments, setComments] = useState([])
   const [commenting, setCommenting] = useState(false)
@@ -126,6 +127,18 @@ const Products = () => {
     });
     // eslint-disable-next-line 
   }, [name]);
+  
+  useEffect(()=>{
+  const verified = async()=>{
+    try{
+      await axiosInstance.get('/is-verified-buyer')
+      setVerifiedBuyer(true)
+    }catch(error){
+      console.log(error)
+      setVerifiedBuyer(false)
+    }}
+  verified()
+  }, [])
  
 
   useEffect(() => {
@@ -161,7 +174,7 @@ const Products = () => {
     <div className='mb-8 px-1 box-border '>
       <div className='flex justify-center xl:px-32'>
         <div className='w-fit'>
-          <div  className=' md:my-7 my-4  '>
+          <div  className=' md:my-7 my-4 w-full px-[3%]'>
           <Button onClick={()=> navigate(-1)}
           sx={{
             backgroundColor: "#E5E6E7 ",
@@ -256,7 +269,7 @@ const Products = () => {
                 </div>
                 <div className='flex items-center ml-2'> 
                   <span className='text-md  font-semibold text-black'>Sarah Duke</span>
-                      <VerifiedIcon sx={{ color:"blue", fontSize: '16px', marginLeft: '3px'}} />
+                   <VerifiedIcon sx={{ color:"blue", fontSize: '16px', marginLeft: '3px'}} />
                   </div>
                 </div>
                 <div className=''>
@@ -296,7 +309,7 @@ const Products = () => {
                           <h2 className='text-md font-semibold text-black whitespace-nowrap overflow-hidden text-ellipsis'>
                             {selector.user.firstname + ' ' + selector.user.lastname}
                           </h2>
-                          <VerifiedIcon sx={{ color: "blue", fontSize: '16px', ml: 1 }} />
+                          {verifiedBuyer && <VerifiedIcon sx={{ color: "blue", fontSize: '16px', ml: 1 }} />}
                         </div>
                        {online === selector.user._id && <DeleteCommentPopover  commentId={selector._id} deleteComment={handleDeleteComment} className='ml-auto' />}
                       </div>

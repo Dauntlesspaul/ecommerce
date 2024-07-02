@@ -206,7 +206,7 @@ function MyOrder() {
                                 <h2>{items.brand}</h2>
                                 <p>Price: $ {(Number(items.discountprice)).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</p>
                                 <p>Quantity: {items.selected}</p>
-                                <p>Size: {items.size[items.sizeIdex]}</p>
+                                <p>Size(s): {items.sizeIndex.map(size=> ' ' + items.size[size]) + ','}</p>
                               </>}
                             </div>
                             </div>

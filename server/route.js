@@ -557,17 +557,16 @@ router.post('/signin-with-google', async (req, res) => {
          
           return res.status(200).send({ message: 'access granted', email: user.email});
       }
-        const givenName = given_name.charAt(0).toUpperCase() + str.slice(1)
-        const familyName = family_name.charAt(0).toUpperCase() + str.slice(1)
-      const newUser = new User({
+        const givenName = given_name.charAt(0).toUpperCase() + given_name.slice(1)
+        const familyName = family_name.charAt(0).toUpperCase() + family_name.slice(1)
+       user = new User({
           firstname: givenName,
           lastname: familyName,
           email: email.toLowerCase(),
-          phone: phoneNumber, 
           verified: true
       });
 
-      await newUser.save();
+      await user.save();
       
       const token = jwt.sign({ userId: user._id }, jwtSecret, { expiresIn: '1h' });
       req.session.token = token;
@@ -918,6 +917,23 @@ router.get('/order-list', authenticateToken, async (req, res) => {
   }
 })
 
+router.get('/is-verified-buyer', authenticateToken, async (req, res) => {
+  
+  try {
+    const { userId } = req.user;
+
+    const user = await Order.find({userId: userId})
+
+    if(!user.length>0){
+      return res.status(404).send({message: "Not a verified buyer"})
+    }
+    return res.status(200).send({message: "Verified buyer"});
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send('Internal Server Error');
+  }
+})
+
 router.post('/addreview', authenticateToken, async(req,res)=>{
  try{
    const {userId} =req.user
@@ -1156,7 +1172,7 @@ router.post('/webhook', express.raw({type: 'application/json'}), async(request, 
       customerDetails: session.customer_details,
       cart: cart.items 
     })
-    console.log(order)
+    
 
     try {
       await order.save();

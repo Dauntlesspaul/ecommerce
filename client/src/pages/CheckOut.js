@@ -131,6 +131,7 @@ function Checkout() {
                         line1: `${details.houseno}, ${details.street}`,
                         city: details.city,
                         postal_code: details.zipcode,
+                        state: details.state,
                         country: details.country,
                     },
                     email: address.email,
@@ -317,10 +318,9 @@ function Checkout() {
                                     <h2><span className='font-medium'>Method of Payment:</span> {paymentmethod === 'cod' ? <span>Cash on Delivery</span> : <span>Stripe</span>}</h2>
                                     <h2 className='font-medium'>Items & Quantity</h2>
                                     {cart.map((item, i) => {
-                                        const shoeSizes = [6, 6.5, 7, 7.5, 8, 9, 10, 11, 12, 13];
                                         return (
                                             <h2 key={i}>
-                                                {item.brand + ' X ' + item.selected + ' size: ' + shoeSizes[item.sizeIdex]}
+                                                {item.brand + ' X ' + item.selected + ' size(s): ' + item.sizeIndex.map(size=> ' ' + item.size[size])}
                                             </h2>
                                         );
                                     })}

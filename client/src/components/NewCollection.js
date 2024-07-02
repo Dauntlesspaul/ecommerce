@@ -43,7 +43,6 @@ function NewCollection({ data, updateCart, wishList, wishlist }) {
             discountprice: selector.discountprice,
             imgurl: selector.imageurl,
             size: [6, 6.5, 7, 7.5, 8, 9, 10, 11, 12, 13],
-            sizeIdex: 0
           };
 
           const isInWishlist = isItemInWishlist(itemData);

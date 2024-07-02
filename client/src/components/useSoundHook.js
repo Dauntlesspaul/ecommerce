@@ -1,35 +1,53 @@
-import { useEffect, useRef } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 
-const useSound = (url) => {
-  const audioContextRef = useRef(null);
-  const bufferRef = useRef(null);
+const useSoundHook = (url) => {
+  const [audioContext, setAudioContext] = useState(null);
+  const [audioBuffer, setAudioBuffer] = useState(null);
+
+  const loadSound = useCallback(async () => {
+    if (!audioContext) {
+      const context = new (window.AudioContext || window.webkitAudioContext)();
+      setAudioContext(context);
+      const response = await fetch(url);
+      const arrayBuffer = await response.arrayBuffer();
+      const buffer = await context.decodeAudioData(arrayBuffer);
+      setAudioBuffer(buffer);
+    }
+  }, [audioContext, url]);
+
+  const playSound = useCallback(async () => {
+    if (audioContext && audioBuffer) {
+      if (audioContext.state === 'suspended') {
+        await audioContext.resume();
+      }
+      const source = audioContext.createBufferSource();
+      source.buffer = audioBuffer;
+      source.connect(audioContext.destination);
+      source.start();
+    }
+  }, [audioContext, audioBuffer]);
 
   useEffect(() => {
-    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-    audioContextRef.current = audioContext;
+    const handleUserGesture = async () => {
+      await loadSound();
+      if (audioContext && audioContext.state === 'suspended') {
+        await audioContext.resume();
+      }
+    };
 
-    fetch(url)
-      .then((response) => response.arrayBuffer())
-      .then((arrayBuffer) => audioContext.decodeAudioData(arrayBuffer))
-      .then((audioBuffer) => {
-        bufferRef.current = audioBuffer;
-      });
+    const handleClick = () => {
+      handleUserGesture();
+      document.removeEventListener('click', handleClick);
+    };
+
+    document.addEventListener('click', handleClick);
 
     return () => {
-      audioContext.close();
+      document.removeEventListener('click', handleClick);
     };
-  }, [url]);
-
-  const playSound = () => {
-    if (bufferRef.current && audioContextRef.current) {
-      const source = audioContextRef.current.createBufferSource();
-      source.buffer = bufferRef.current;
-      source.connect(audioContextRef.current.destination);
-      source.start(0);
-    }
-  };
+  }, [audioContext, loadSound]);
 
   return playSound;
 };
 
-export default useSound;
+export default useSoundHook;

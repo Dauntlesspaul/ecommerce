@@ -12,12 +12,21 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { IconButton } from '@mui/material';
 import CreditScoreOutlinedIcon from '@mui/icons-material/CreditScoreOutlined';
 import RemoveShoppingCartOutlinedIcon from '@mui/icons-material/RemoveShoppingCartOutlined';
+import KeyboardArrowLeftOutlinedIcon from '@mui/icons-material/KeyboardArrowLeftOutlined';
+import KeyboardArrowRightOutlinedIcon from '@mui/icons-material/KeyboardArrowRightOutlined';
+
 
 function Cart() {
     const [total, setTotal] = useState(0);;
     const [open, setOpen] = useState(false);
     const navigate = useNavigate()
     const location = useLocation()
+    const [isMd, setIsMd] = useState(window.innerWidth >= 768);
+    useEffect(() => {
+        const handleResize = () => setIsMd(window.innerWidth >= 768);
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+      }, []);
     const handleClickOpen = () => {
         setOpen(true);
     };
@@ -51,13 +60,13 @@ const handleRemoveFromCart = (items)=>{
 const handleDeleteItem = (items)=>{
     deleteItem(items)
 }
-const handleReduceSize = (items)=>{
-    reduceSize(items)
-}
-    
-const handleIncreaseSize = (items)=>{
-    increaseSize(items)
-}
+const handleReduceSize = (items, index) => {
+    reduceSize(items, index);
+  };
+
+  const handleIncreaseSize = (items, index) => {
+    increaseSize(items, index);
+  };
 const handleClearCart = () =>{
     clearCart()
 }
@@ -90,8 +99,8 @@ const handleClearCart = () =>{
                 </div>
                 <div className='grid place-items-center  my-7'>
                     <div className='w-full lg:w-8/12  md:flex '>
-                        <div className='w-full grid place-items-center md:h-fit '>
-                           <div className='text-black place-self-start 2xl:px-16 px-[4%] text-3xl font-bold flex justify-between w-full items-center'> 
+                        <div className='w-full grid place-items-center md:h-fit p-3'>
+                           <div className=' shadow-md text-black place-self-start 2xl:px-16 px-[4%] text-3xl font-bold flex justify-between w-full items-center'> 
                             <h2>Cart <span className=' text-gray-500 text-xl'>{cart.length} ITEMS</span></h2>
                              <span> 
                                  <IconButton
@@ -136,35 +145,62 @@ const handleClearCart = () =>{
                             </span>
                             </div>
                             {cart.map((selector, i) => {
+                                  const buttonStyle = {
+                                    border: '2px solid gray',
+                                    borderRadius: '4px',
+                                    padding: '10px',
+                                    width: isMd ? '28px' : '10px', 
+                                    height: isMd ? '28px' : '10px', 
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                  }
                                 return (
-                                    <div key={i} className='w-11/12 max-w-[700px]  p-3 my-2 shadow-md shadow-gray-200 flex'>
+                                    <div key={i} className='w-11/12 max-w-[700px]  p-3 my-2 shadow-md shadow-gray-200 flex justify-between'>
                                         <div className=' lg:w-44 lg:h-36 w-28 h-20 mr-3'><img className='w-full h-full' src={selector.imgurl} alt="" /></div>
-                                        <div className='flex justify-between w-full'>
-                                            <div>
-                                                <span className='text-md text-black font-semibold md:text-lg'>{selector.brand.split(' ').map(capitalize => capitalize[0].toUpperCase() + capitalize.slice(1)).join(' ')}</span>
+                                        <div className='md:flex md:justify-between w-full '>
+                                            <div className='w-full'>
+                                                <span className='text-base text-black font-semibold md:text-lg'>{selector.brand.split(' ').map(capitalize => capitalize[0].toUpperCase() + capitalize.slice(1)).join(' ')}</span>
                                                 {selector.rating === 4 ? <Fourstar styleProp="flex" widthSize="13px" /> :
                                                     selector.rating === 4.5 ? <Fourhalf styleProp="flex" widthSize="13px" /> :
                                                         selector.rating === 5 ? <Fivestar styleProp='flex' widthSize="13px" /> : <Threestar styleProp="flex" widthSize='13px' />}
-                                                <span className='text-black font-medium md:text-lg'>Quantity</span>
-                                                <div className='flex mb-2 items-center justify-evenly h-8 w-32 bg-gray-50 font-bold text-lg border-2 border-gray-200'>
-                                                    <button onClick={() => handleRemoveFromCart({ brand: selector.brand, units: selector.units, discountprice: selector.discountprice, rating: selector.rating, imgurl: selector.imageurl })} >-</button>
-                                                    <span className='mx-4'>{selector.selected}</span>
-                                                    <button onClick={() => handleAddToCart({ brand: selector.brand, units: selector.units, discountprice: selector.discountprice, rating: selector.rating, imgurl: selector.imageurl })} >+</button>
+                                               
+                                                <div className='flex items-center mt-2 md:max-w-[170px] max-w-[164px] justify-between' >
+                                                    <IconButton
+                                                    style={buttonStyle}
+                                                    onClick={() => handleRemoveFromCart({ brand: selector.brand, units: selector.units, discountprice: selector.discountprice, rating: selector.rating, imgurl: selector.imageurl })}>
+                                                
+                                                        <KeyboardArrowLeftOutlinedIcon/>
+                                                    </IconButton>
+                                                    <span className='mx-4 text-sm md:text-base'>Quantity: {selector.selected}</span>
+                                                    <IconButton
+                                                     style={buttonStyle}
+                                                     onClick={() => handleAddToCart({ brand: selector.brand, units: selector.units, discountprice: selector.discountprice, rating: selector.rating, imgurl: selector.imageurl })}>
+                                                        <KeyboardArrowRightOutlinedIcon/>
+                                                    </IconButton>
                                                 </div>
-                                                <div className='flex my-2 items-center justify-evenly h-8 w-32 bg-gray-50 font-bold text-lg border-2 border-gray-200'>
-                                                    <button onClick={() => handleReduceSize({ brand: selector.brand, units: selector.units, discountprice: selector.discountprice, rating: selector.rating, imgurl: selector.imageurl, size: selector.size, sizeIdex: selector.sizeIdex })} >-</button>
-                                                    <span className='mx-2 text-sm'>Size {selector.size[selector.sizeIdex]}</span>
-                                                    <button onClick={() => handleIncreaseSize({ brand: selector.brand, units: selector.units, discountprice: selector.discountprice, rating: selector.rating, imgurl: selector.imageurl, size: selector.size, sizeIdex: selector.sizeIdex })} >+</button>
+                                                {selector.sizeIndex.map((sizeIdx, index) => (
+                                                <div key={index} className='flex items-center mt-2 md:max-w-[170px] max-w-[164px] justify-between'>
+                                                    <IconButton style={buttonStyle} onClick={() => handleReduceSize(selector, index)}>
+                                                    <KeyboardArrowLeftOutlinedIcon />
+                                                    </IconButton>
+                                                    <span className='mx-2 text-sm md:text-base'>Size: {selector.size[sizeIdx]}</span>
+                                                    <IconButton style={buttonStyle} onClick={() => handleIncreaseSize(selector, index)}>
+                                                    <KeyboardArrowRightOutlinedIcon />
+                                                    </IconButton>
                                                 </div>
+                                                ))}
                                             </div>
-                                            <div className='flex flex-col justify-center'>
+                                            <div className='flex flex-col justify-end'>
                                                 <span className='text-xs text-gray-500 mt-8'>${selector.discountprice}.00 x {selector.selected}</span>
                                                 <span>${selector.discountprice * selector.selected}.00</span>
                                                 <Button 
                                                 variant='contained'
                                                 color='error'
+                                                size='small'
                                                  sx={{
                                                     marginTop: '4px',
+                                                    width: isMd ? '100%' : '164px',
                                                     display: 'flex',
                                                     alignItems: 'center',
                                                  }}
