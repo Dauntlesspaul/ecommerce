@@ -43,17 +43,17 @@ const authenticateToken = (req, res, next) => {
   const token = req.cookies.auth_token;
 
   if (!token) {
-    return res.status(403).send({ message: 'Access Denied: No Token Provided' });
+    return res.status(401).send({ message: 'Access Denied' });
   }
 
   try {
     const verified = jwt.verify(token, jwtSecret);
     req.user = verified;
     next();
-  } catch (err) {
-    return res.status(401).send({ message: 'Invalid Token' });
+  } catch (error) {
+    return res.status(403).send({ message: 'Invalid Token' });
   }
-}
+};
 
 /*const authenticateToken = (req, res, next) => {
   const token = req.session.token;
@@ -602,16 +602,15 @@ router.post('/sign-in', async (req, res) => {
   try {
     const { email, password } = req.body;
     const user = await User.findOne({ email: email.toLowerCase() });
-    if (!user) {
+    if (!user || !user.password) {
       return res.status(404).send({ message: 'Invalid Credentials' });
     }
-    if (!user.password) {
-      return res.status(404).send({ message: 'Invalid Credentials' });
-    }
+
     const isPassword = await bcrypt.compare(password, user.password);
     if (!isPassword) {
       return res.status(404).send({ message: "Invalid Credentials" });
     }
+
     if (!user.verified) {
       return res.status(206).send({ message: 'User not verified yet' });
     }
@@ -619,11 +618,11 @@ router.post('/sign-in', async (req, res) => {
     const token = jwt.sign({ userId: user._id }, jwtSecret, { expiresIn: '1h' });
 
     res.cookie('auth_token', token, {
-      maxAge: 1000 * 60 * 60, 
+      maxAge: 1000 * 60 * 60, // 1 hour
       sameSite: 'None',
       secure: true,
       httpOnly: true
-    })
+    });
 
     return res.send({ message: 'Sign-in successful' });
   } catch (error) {
