@@ -89,7 +89,7 @@ function Login() {
            formDataObject.append('password', formData.password)
         event.preventDefault()
         setLoading(true);
-        const response = await axios.post('/sign-in', formDataObject)
+        const response = await axiosInstance.post('/sign-in', formDataObject)
         setLoading(false);
         if (response.data.message === 'Sign-in successful') {
             const from = location.state?.from || '/profile'; 
