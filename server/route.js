@@ -39,23 +39,22 @@ const randomToken = (bytes = 32) => crypto.randomBytes(bytes).toString('hex');
 //jwtsecret
 const jwtSecret = process.env.JWT_SECRET
 // Middleware to verify JWT
-const authenticateToken = (req, res, next) => {
-  const token = req.cookies.auth_token;
-
+/*const authenticateToken = (req, res, next) => {
+  const token = req.cookies.token;
   if (!token) {
-    return res.status(401).send({ message: 'Access Denied' });
+    return res.status(401).send('Access Denied: No Token Provided');
   }
 
   try {
-    const verified = jwt.verify(token, jwtSecret);
-    req.user = verified;
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = decoded;
     next();
-  } catch (error) {
-    return res.status(403).send({ message: 'Invalid Token' });
+  } catch (err) {
+    return res.status(401).send('Access Denied: Invalid Token');
   }
-};
+};*/
 
-/*const authenticateToken = (req, res, next) => {
+const authenticateToken = (req, res, next) => {
   const token = req.session.token;
   if (!token) {
     return res.status(401).send('Access Denied: No Token Provided');
@@ -68,7 +67,7 @@ const authenticateToken = (req, res, next) => {
   } catch (err) {
     return res.status(401).send('Access Denied: Invalid Token');
   }
-};*/
+};
 
 // Multer S3 configuration
 const upload = multer({
@@ -553,13 +552,7 @@ router.post('/signin-with-google', async (req, res) => {
 
       if (user) {
         const token = jwt.sign({ userId: user._id }, jwtSecret, { expiresIn: '1h' });
-
-        res.cookie('auth_token', token, {
-          maxAge: 1000 * 60 * 60, 
-          sameSite: 'None',
-          secure: true,
-          httpOnly: true
-        })
+        req.session.token = token;
     
   
          
@@ -579,13 +572,7 @@ router.post('/signin-with-google', async (req, res) => {
       await user.save();
       
       const token = jwt.sign({ userId: user._id }, jwtSecret, { expiresIn: '1h' });
-
-    res.cookie('auth_token', token, {
-      maxAge: 1000 * 60 * 60, 
-      sameSite: 'None',
-      secure: true,
-      httpOnly: true
-    })
+      req.session.token = token;
 
       return res.status(201).send('User created');
   } catch (error) {
@@ -615,14 +602,9 @@ router.post('/sign-in', async (req, res) => {
       return res.status(206).send({ message: 'User not verified yet' });
     }
 
+   
     const token = jwt.sign({ userId: user._id }, jwtSecret, { expiresIn: '1h' });
-
-    res.cookie('auth_token', token, {
-      maxAge: 1000 * 60 * 60, // 1 hour
-      sameSite: 'None',
-      secure: true,
-      httpOnly: true
-    });
+    req.session.token = token;
 
     return res.send({ message: 'Sign-in successful' });
   } catch (error) {
@@ -1295,13 +1277,15 @@ router.post('/reset-link-change-password', async(req,res)=>{
 })
 
 
+
 router.post('/logout', (req, res) => {
-  res.clearCookie('auth_token', {
-    httpOnly: true,
-    secure: true,
-    sameSite: 'None'
+  req.session.destroy((err) => {
+    if (err) {
+      return res.status(500).send('Internal Server Error');
+    }
+    res.clearCookie('connect.sid');
+    return res.status(200).send({ message: 'Logout successful' });
   });
-  return res.send({ message: 'Logout successful' });
 });
 
 
