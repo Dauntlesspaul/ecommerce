@@ -24,22 +24,15 @@ app.use(session({
     httpOnly: true 
   }
 }));
-
+app.use(cors({
+  origin: 'https://shoe-haven.vercel.app',
+  credentials: true
+}));
 
 app.use('/api/stripe',require('./route'))
 app.use(express.urlencoded({extended:true}));
 app.use(express.json())
 app.use(bodyParser.json());
-const crossOrigins = [
-  'https://shoe-haven.vercel.app',
-]
-const corsOptions = {
-  origin: crossOrigins,
-  optionsSuccessStatus: 200,
-  methods: 'GET,POST,PUT,DELETE',
-  credentials: true 
-};
-app.use(cors(corsOptions));
 app.use(cookieParser())
 app.use('/',require('./route'))
 
