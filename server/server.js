@@ -12,19 +12,18 @@ connectDB();
 
 
 
-  app.use(session({
-    secret: "keyboard mouse",
-    resave: false,
-    saveUninitialized: false,
-    store: MongoStore.create({
-      mongoUrl: process.env.MONGO_URI,
-      ttl: 14 * 24 * 60 * 60 
-    }),
-    cookie: {
-      maxAge: 1000 * 60 * 60 * 24 * 14, 
-     
-    }
-  }));
+app.use(session({
+  secret: "keyboard mouse",
+  resave: false,
+  saveUninitialized: false,
+  store: MongoStore.create({ mongoUrl: process.env.MONGO_URI }),
+  cookie: {
+    maxAge: 1000 * 60 * 60 * 24 * 14, 
+    secure: true, 
+    sameSite: 'None' 
+  }
+}));
+
 
 app.use('/api/stripe',require('./route'))
 app.use(express.urlencoded({extended:true}));
