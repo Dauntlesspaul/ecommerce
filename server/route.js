@@ -553,7 +553,14 @@ router.post('/signin-with-google', async (req, res) => {
 
       if (user) {
         const token = jwt.sign({ userId: user._id }, jwtSecret, { expiresIn: '1h' });
-        req.session.token = token;
+
+        res.cookie('auth_token', token, {
+          maxAge: 1000 * 60 * 60, 
+          sameSite: 'None',
+          secure: true,
+          httpOnly: true
+        })
+    
   
          
           return res.status(200).send({ message: 'access granted', email: user.email});
@@ -572,8 +579,13 @@ router.post('/signin-with-google', async (req, res) => {
       await user.save();
       
       const token = jwt.sign({ userId: user._id }, jwtSecret, { expiresIn: '1h' });
-      req.session.token = token;
 
+    res.cookie('auth_token', token, {
+      maxAge: 1000 * 60 * 60, 
+      sameSite: 'None',
+      secure: true,
+      httpOnly: true
+    })
 
       return res.status(201).send('User created');
   } catch (error) {
