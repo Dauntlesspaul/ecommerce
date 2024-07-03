@@ -10,7 +10,10 @@ const {connectDB} = require('./config/db')
 const PORT = process.env.PORT || 8000
 connectDB();
 
-
+app.use(cors({
+  origin: 'https://shoe-haven.vercel.app',
+  credentials: true
+}));
 
 app.use(session({
   secret: "keyboard mouse",
@@ -24,10 +27,7 @@ app.use(session({
     httpOnly: true 
   }
 }));
-app.use(cors({
-  origin: 'https://shoe-haven.vercel.app',
-  credentials: true
-}));
+
 
 app.use('/api/stripe',require('./route'))
 app.use(express.urlencoded({extended:true}));
