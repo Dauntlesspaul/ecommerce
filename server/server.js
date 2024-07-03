@@ -2,8 +2,8 @@ const express = require('express');
 require('dotenv').config();
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const session = require('express-session');
-const MongoStore = require('connect-mongo');
+//const session = require('express-session');
+//const MongoStore = require('connect-mongo');
 const cors = require('cors');
 const { connectDB } = require('./config/db');
 const PORT = process.env.PORT || 8000;
@@ -20,21 +20,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-app.use(session({
-  secret: "keyboard mouse",
-  resave: false,
-  saveUninitialized: false,
-  store: MongoStore.create({ 
-    mongoUrl: process.env.MONGO_URI,
-    ttl: 14 * 24 * 60 * 60 // 14 days
-  }),
-  cookie: {
-    maxAge: 1000 * 60 * 60 * 24 * 14, // 14 days
-    sameSite: 'None', // Allow cross-site cookies
-    secure: true, // Ensure cookies are only sent over HTTPS
-    httpOnly: true // Ensure the cookie is not accessible via JavaScript
-  }
-}));
 
 // Routes
 app.use('/api/stripe', require('./route'));

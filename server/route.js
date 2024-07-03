@@ -39,22 +39,23 @@ const randomToken = (bytes = 32) => crypto.randomBytes(bytes).toString('hex');
 //jwtsecret
 const jwtSecret = process.env.JWT_SECRET
 // Middleware to verify JWT
-/*const authenticateToken = (req, res, next) => {
-  const token = req.cookies.token;
+const authenticateToken = (req, res, next) => {
+  const token = req.cookies['auth_token'];
+
   if (!token) {
-    return res.status(401).send('Access Denied: No Token Provided');
+    return res.status(403).send({ message: 'Access Denied: No Token Provided' });
   }
 
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = decoded;
+    const verified = jwt.verify(token, jwtSecret);
+    req.user = verified;
     next();
   } catch (err) {
-    return res.status(401).send('Access Denied: Invalid Token');
+    return res.status(401).send({ message: 'Invalid Token' });
   }
-};*/
+}
 
-const authenticateToken = (req, res, next) => {
+/*const authenticateToken = (req, res, next) => {
   const token = req.session.token;
   if (!token) {
     return res.status(401).send('Access Denied: No Token Provided');
@@ -67,7 +68,7 @@ const authenticateToken = (req, res, next) => {
   } catch (err) {
     return res.status(401).send('Access Denied: Invalid Token');
   }
-};
+};*/
 
 // Multer S3 configuration
 const upload = multer({
@@ -1285,14 +1286,14 @@ router.post('/reset-link-change-password', async(req,res)=>{
 
 
 router.post('/logout', (req, res) => {
-  req.session.destroy((err) => {
-    if (err) {
-      return res.status(500).send('Internal Server Error');
-    }
-    res.clearCookie('connect.sid');
-    return res.status(200).send({ message: 'Logout successful' });
+  res.clearCookie('connect.sid', {
+    httpOnly: true,
+    secure: true,
+    sameSite: 'None'
   });
+  return res.send({ message: 'Logout successful' });
 });
+
 
 
 
