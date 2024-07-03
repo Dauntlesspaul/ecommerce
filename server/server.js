@@ -15,8 +15,23 @@ app.use(cors({
   credentials: true
 }));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cookieParser());
+const crossOrigins = [
+  'http://localhost:3000',
+  'http://172.20.10.14:3000'
+]
+const corsOptions = {
+  origin: crossOrigins,
+  optionsSuccessStatus: 200,
+  credentials: true 
+};
+app.use(cors(corsOptions));
+app.use(cookieParser())
+app.use('/',require('./route'))
+
+
+app.listen(PORT, ()=>{
+  return   console.log(`app is running at port ${PORT}`)
+})
 
 // Routes
 app.use('/api/stripe', require('./route'));
