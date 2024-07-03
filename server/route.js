@@ -585,37 +585,41 @@ router.get('/verify-user-login', authenticateToken, (req,res)=>{
    return res.status(200).send({'message': 'user is signed in'})
 })
 
-router.post('/sign-in', async(req,res)=>{
-  try{
-    const {email, password} = req.body;
-    const user = await User.findOne({email: email.toLowerCase() })
-    if(!user){
-      return res.status(404).send({message: 'Invalid Crdentials'})
+router.post('/sign-in', async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    const user = await User.findOne({ email: email.toLowerCase() });
+    if (!user) {
+      return res.status(404).send({ message: 'Invalid Credentials' });
     }
-     if(!user.password){
-      return res.status(404).send({message: 'Invalid Crdentials'})
-     }
-      const isPassword = await bcrypt.compare(password, user.password)
-      if(!isPassword){
-        return res.status(404).send({message: "Invalid Credentials"})
-      }
-      if(!user.verified){
-        return res.status(206).send({message: 'User not verified yet'})
-      }
- 
-   
-      const token = jwt.sign({ userId: user._id }, jwtSecret, { expiresIn: '1h' });
-      req.session.token = token;
-      console.log('Session:', req.session);
-      console.log('Set-Cookie:', req.headers['set-cookie']);
+    if (!user.password) {
+      return res.status(404).send({ message: 'Invalid Credentials' });
+    }
+    const isPassword = await bcrypt.compare(password, user.password);
+    if (!isPassword) {
+      return res.status(404).send({ message: "Invalid Credentials" });
+    }
+    if (!user.verified) {
+      return res.status(206).send({ message: 'User not verified yet' });
+    }
 
-      return res.send({ message: 'Sign-in successful' });
-    }catch(error){
-      console.log(error);
-      return res.status(500).send('Internal Server Error');
+    const token = jwt.sign({ userId: user._id }, jwtSecret, { expiresIn: '1h' });
+    req.session.token = token;
+
+    res.cookie('connect.sid', req.sessionID, {
+      maxAge: 1000 * 60 * 60 * 24 * 14, // 14 days
+      sameSite: 'None',
+      secure: true,
+      httpOnly: true
+    });
+
+    return res.send({ message: 'Sign-in successful' });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send('Internal Server Error');
   }
+});
 
-})
 
 
 router.get('/:id/verify/:token', async (req, res) => {
