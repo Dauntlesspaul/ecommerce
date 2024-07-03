@@ -40,7 +40,7 @@ const randomToken = (bytes = 32) => crypto.randomBytes(bytes).toString('hex');
 const jwtSecret = process.env.JWT_SECRET
 // Middleware to verify JWT
 const authenticateToken = (req, res, next) => {
-  const token = req.cookies['auth_token'];
+  const token = req.cookies.auth_token;
 
   if (!token) {
     return res.status(403).send({ message: 'Access Denied: No Token Provided' });
@@ -605,14 +605,13 @@ router.post('/sign-in', async (req, res) => {
     }
 
     const token = jwt.sign({ userId: user._id }, jwtSecret, { expiresIn: '1h' });
-    req.session.token = token;
 
-    res.cookie('connect.sid', req.sessionID, {
-      maxAge: 1000 * 60 * 60 * 24 * 14, // 14 days
+    res.cookie('auth_token', token, {
+      maxAge: 1000 * 60 * 60, 
       sameSite: 'None',
       secure: true,
       httpOnly: true
-    });
+    })
 
     return res.send({ message: 'Sign-in successful' });
   } catch (error) {
@@ -1286,7 +1285,7 @@ router.post('/reset-link-change-password', async(req,res)=>{
 
 
 router.post('/logout', (req, res) => {
-  res.clearCookie('connect.sid', {
+  res.clearCookie('auth_token', {
     httpOnly: true,
     secure: true,
     sameSite: 'None'
