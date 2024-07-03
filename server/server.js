@@ -32,11 +32,12 @@ app.use(session({
   saveUninitialized: false,
   store: MongoStore.create({ mongoUrl: process.env.MONGO_URI, ttl: 14 * 24 * 60 * 60 }),
   cookie: {
-    maxAge: 1000 * 60 * 60 * 24 * 14, 
-    sameSite: 'None',
+    maxAge: 1000 * 60 * 60 * 24 * 14, // 14 days
+    sameSite: 'None', 
+    secure: true,
     httpOnly: true
   }
-}));
+}))
 
 // Routes
 app.use('/api/stripe', require('./route'));
