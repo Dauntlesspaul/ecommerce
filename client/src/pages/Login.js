@@ -82,33 +82,35 @@ function Login() {
             return updatedChecked;
         });
     };
-    const handleSubmit = async(event)=>{
-        try{
-           const formDataObject = new FormData()
-           formDataObject.append('email', formData.email)
-           formDataObject.append('password', formData.password)
-        event.preventDefault()
+    const handleSubmit = async (event) => {
+        event.preventDefault();
         setLoading(true);
-        const response = await axiosInstance.post('/sign-in', formDataObject)
-        setLoading(false);
-        if (response.data.message === 'Sign-in successful') {
-            const from = location.state?.from || '/profile'; 
-            navigate(from, { replace: true })
-        }else{
+        try {
+          const response = await axiosInstance.post('/sign-in', {
+            email: formData.email,
+            password: formData.password,
+          }, {
+            withCredentials: true
+          });
+          setLoading(false);
+          if (response.data.message === 'Sign-in successful') {
+            const from = location.state?.from || '/profile';
+            navigate(from, { replace: true });
+          } else {
             setLoading(true);
-            await axiosInstance.post('/new-email-verification', formDataObject)
+            await axiosInstance.post('/new-email-verification', formData);
             setLoading(false);
-            soundError()
-            toast.info('This account has not been verified, a new verification link has been sent to your Email address', {autoClose: 12000})
+            soundError();
+            toast.info('This account has not been verified, a new verification link has been sent to your Email address', {autoClose: 12000});
+          }
+        } catch (error) {
+          setLoading(false);
+          soundError();
+          console.log(error);
+          toast.error(error.response.data.message);
         }
-        }catch(error){
-            setLoading(false);
-            soundError()
-            console.log(error)
-            toast.error(error.response.data.message)
-        }
-    }
-
+      };
+      
 
     if (loading) {
         return (
