@@ -37,7 +37,7 @@ app.use(session({
     secure: true,
     httpOnly: true,
   }
-}))
+}));
 
 // Routes
 app.use('/api/stripe', require('./route'));

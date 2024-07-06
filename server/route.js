@@ -605,7 +605,7 @@ router.post('/sign-in', async (req, res) => {
    
     const token = jwt.sign({ userId: user._id }, jwtSecret, { expiresIn: '1h' });
     req.session.token = token;
-
+    console.log('Response Headers:', res.getHeaders()); // Log headers to verify Set-Cookie
     return res.send({ message: 'Sign-in successful' });
   } catch (error) {
     console.log(error);
