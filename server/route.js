@@ -595,24 +595,27 @@ router.post('/sign-in', async (req, res) => {
 
     const isPassword = await bcrypt.compare(password, user.password);
     if (!isPassword) {
-      return res.status(404).send({ message: "Invalid Credentials" });
+      return res.status(404).send({ message: 'Invalid Credentials' });
     }
 
     if (!user.verified) {
       return res.status(206).send({ message: 'User not verified yet' });
     }
 
-   
     const token = jwt.sign({ userId: user._id }, jwtSecret, { expiresIn: '1h' });
     req.session.token = token;
+
+    // Set a test cookie explicitly
     res.cookie('testCookie', 'testValue', {
       maxAge: 1000 * 60 * 60 * 24 * 14, // 14 days
       httpOnly: true,
       sameSite: 'none',
       secure: true
     });
+
     console.log('Session:', req.session);
     console.log('Cookies:', req.cookies);
+
     return res.send({ message: 'Sign-in successful' });
   } catch (error) {
     console.log(error);

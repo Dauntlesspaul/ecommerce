@@ -18,13 +18,6 @@ const corsOptions = {
   credentials: true,
   allowedHeaders: ['Content-Type', 'Authorization']
 };
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'https://shoe-haven.vercel.app');
-  res.header('Access-Control-Allow-Credentials', 'true');
-  res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  next();
-});
 
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
@@ -44,6 +37,8 @@ app.use(session({
   }
 }));
 
+// Routes
+app.use('/api/stripe', require('./route'));
 app.use('/', require('./route'));
 
 app.listen(PORT, () => {
