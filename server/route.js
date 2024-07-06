@@ -605,7 +605,6 @@ router.post('/sign-in', async (req, res) => {
     const token = jwt.sign({ userId: user._id }, jwtSecret, { expiresIn: '1h' });
     req.session.token = token;
 
-    // Set the session cookie explicitly
     res.cookie('session', req.session.token, {
       maxAge: 1000 * 60 * 60 * 24 * 14, // 14 days
       httpOnly: true,
@@ -622,6 +621,7 @@ router.post('/sign-in', async (req, res) => {
     return res.status(500).send('Internal Server Error');
   }
 });
+
 
 
 
