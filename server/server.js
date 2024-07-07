@@ -24,16 +24,15 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.use(session({
-  secret:'keyboard mouse',
+  secret: 'keyboard mouse',
   resave: false,
   saveUninitialized: true,
   store: MongoStore.create({ mongoUrl: process.env.MONGO_URI, ttl: 14 * 24 * 60 * 60 }),
   cookie: {
-    secure: true,
-    sameSite: 'none',
-    maxAge: 1000 * 60 * 60 * 24 * 14,
-    domain: '.domain.com'
-}
+    secure: true, // Set to true for HTTPS
+    sameSite: 'none', // Necessary for cross-site cookies
+    maxAge: 1000 * 60 * 60 * 24 * 14, // 14 days
+  }
 }));
 
 // Routes
