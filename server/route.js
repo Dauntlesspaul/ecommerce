@@ -145,7 +145,7 @@ router.post('/profile-upload',profileUpload, authenticateToken, async(req, res) 
       const parts = url.split('/')
       const key = parts[parts.length - 1]
       const params = {
-        Bucket: bucketName2, 
+        Bucket: bucketNameSecond, 
         Key: key
       } 
       const deleteCommand = new DeleteObjectCommand(params);
