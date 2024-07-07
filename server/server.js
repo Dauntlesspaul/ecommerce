@@ -13,9 +13,9 @@ connectDB();
 
 const corsOptions = {
   origin: 'https://shoe-haven.vercel.app',
-  optionsSuccessStatus: 200,
   credentials: true,
   allowedHeaders: ['Content-Type', 'Authorization'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
 };
 
 app.use(cors(corsOptions));
@@ -24,13 +24,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.use(session({
-  secret: "keyboard mouse",
+  secret: process.env.SESSION_SECRET || 'keyboard mouse',
   resave: false,
   saveUninitialized: false,
   store: MongoStore.create({ mongoUrl: process.env.MONGO_URI, ttl: 14 * 24 * 60 * 60 }),
   cookie: {
     maxAge: 1000 * 60 * 60 * 24 * 14, // 14 days
-    sameSite: 'none', 
+    sameSite: 'none',
     secure: true,
     httpOnly: true,
   },

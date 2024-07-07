@@ -610,8 +610,8 @@ router.post('/sign-in', async (req, res) => {
 
     res.setHeader('Access-Control-Allow-Origin', 'https://shoe-haven.vercel.app');
     res.setHeader('Access-Control-Allow-Credentials', 'true');
-    
-    
+
+    // Log the response headers to verify the Set-Cookie header is being set
     res.on('finish', () => {
       console.log('Response Headers:', res.getHeaders());
     });
@@ -622,8 +622,6 @@ router.post('/sign-in', async (req, res) => {
     return res.status(500).send('Internal Server Error');
   }
 });
-
-
 
 
 router.get('/:id/verify/:token', async (req, res) => {
