@@ -611,7 +611,7 @@ router.post('/sign-in', async (req, res) => {
     res.setHeader('Access-Control-Allow-Origin', 'https://shoe-haven.vercel.app');
     res.setHeader('Access-Control-Allow-Credentials', 'true');
     
-    // Log the session details to see if the cookie is being set properly
+    
     res.on('finish', () => {
       console.log('Response Headers:', res.getHeaders());
     });
