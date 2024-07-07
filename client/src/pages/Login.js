@@ -12,6 +12,9 @@ import axios from 'axios'
 import createAxiosInstance from '../components/axiosInstance'
 import CircularIndeterminate from '../components/Loader'
 library.add(faUser, faUser)
+axios.defaults.baseURL = 'https://shoe-haven-api.vercel.app'; 
+axios.defaults.withCredentials = true; 
+axios.defaults.headers.common['Content-Type'] = 'application/json';
 
 
   
@@ -86,7 +89,7 @@ function Login() {
         event.preventDefault();
         setLoading(true);
         try {
-          const response = await axiosInstance.post('/sign-in', {
+          const response = await axios.post('/sign-in', {
             email: formData.email,
             password: formData.password,
           }, {
