@@ -9,7 +9,11 @@ const { connectDB } = require('./config/db');
 const PORT = process.env.PORT || 8000;
 
 const app = express();
+
+app.enable('trust proxy');
+
 connectDB();
+
 
 const corsOptions = {
   origin: 'https://shoe-haven.vercel.app',
