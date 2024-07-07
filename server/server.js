@@ -33,9 +33,9 @@ app.use(session({
   saveUninitialized: true,
   store: MongoStore.create({ mongoUrl: process.env.MONGO_URI, ttl: 14 * 24 * 60 * 60 }),
   cookie: {
-    secure: true, // Set to true for HTTPS
-    sameSite: 'none', // Necessary for cross-site cookies
-    maxAge: 1000 * 60 * 60 * 24 * 14, // 14 days
+    secure: true, 
+    sameSite: 'none', 
+    maxAge: 1000 * 60 * 60 * 24 * 14, 
   }
 }));
 

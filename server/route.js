@@ -18,7 +18,7 @@ const ResetToken = require('./model/resettoken')
 const Order = require('./model/Order')
 // AWS S3 Configuration
 const bucketName = process.env.BUCKET_NAME;
-const bucketName2 = process.env.BUCKET_NAME2;
+const bucketName2 = process.env.BUCKET_NAME2 || 'shoehaven-profile-upload';
 const bucketRegion = process.env.BUCKET_REGION;
 const accessKey = process.env.ACCES_KEY;
 const secretAccessKey = process.env.SECRET_ACCESS_KEY;
@@ -160,6 +160,7 @@ router.post('/profile-upload',profileUpload, authenticateToken, async(req, res) 
       return res.status(500).send('Internal Server Error');
     }
   });
+
   router.post('/remove-profile-pic', authenticateToken, async(req, res) => {
     try {
       
