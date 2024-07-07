@@ -11,12 +11,11 @@ const PORT = process.env.PORT || 8000;
 const app = express();
 connectDB();
 
-
 const corsOptions = {
   origin: 'https://shoe-haven.vercel.app',
   optionsSuccessStatus: 200,
   credentials: true,
-  allowedHeaders: ['Content-Type', 'Authorization']
+  allowedHeaders: ['Content-Type', 'Authorization'],
 };
 
 app.use(cors(corsOptions));
@@ -34,7 +33,7 @@ app.use(session({
     sameSite: 'none', 
     secure: true,
     httpOnly: true,
-  }
+  },
 }));
 
 // Routes

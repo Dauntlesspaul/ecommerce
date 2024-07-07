@@ -605,23 +605,17 @@ router.post('/sign-in', async (req, res) => {
     const token = jwt.sign({ userId: user._id }, jwtSecret, { expiresIn: '1h' });
     req.session.token = token;
 
-    res.cookie('session', req.session.token, {
-      maxAge: 1000 * 60 * 60 * 24 * 14, // 14 days
-      httpOnly: true,
-      sameSite: 'none',
-      secure: true
-    });
-
     console.log('Session:', req.session);
     console.log('Cookies:', req.cookies);
-
-    return res.send({ message: 'Sign-in successful' });
+    res.setHeader('Access-Control-Allow-Origin', 'https://shoe-haven.vercel.app');
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+    console.log('Response Headers:', res.getHeaders());
+    res.send({ message: 'Sign-in successful' });
   } catch (error) {
     console.log(error);
     return res.status(500).send('Internal Server Error');
   }
 });
-
 
 
 
