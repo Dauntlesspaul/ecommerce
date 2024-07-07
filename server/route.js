@@ -605,17 +605,6 @@ router.post('/sign-in', async (req, res) => {
     const token = jwt.sign({ userId: user._id }, jwtSecret, { expiresIn: '1h' });
     req.session.token = token;
 
-    console.log('Session:', req.session);
-    console.log('Cookies:', req.cookies);
-
-    res.setHeader('Access-Control-Allow-Origin', 'https://shoe-haven.vercel.app');
-    res.setHeader('Access-Control-Allow-Credentials', 'true');
-
-    // Log the response headers to verify the Set-Cookie header is being set
-    res.on('finish', () => {
-      console.log('Response Headers:', res.getHeaders());
-    });
-
     return res.send({ message: 'Sign-in successful' });
   } catch (error) {
     console.log(error);
