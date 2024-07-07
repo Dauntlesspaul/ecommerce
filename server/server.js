@@ -26,12 +26,10 @@ app.use(cookieParser());
 app.use(session({
   secret: process.env.SESSION_SECRET || 'keyboard mouse',
   resave: false,
-  saveUninitialized: false,
+  saveUninitialized: true,
   store: MongoStore.create({ mongoUrl: process.env.MONGO_URI, ttl: 14 * 24 * 60 * 60 }),
   cookie: {
     maxAge: 1000 * 60 * 60 * 24 * 14, // 14 days
-    sameSite: 'none',
-    secure: true,
     httpOnly: true,
      domain: '.domain.com'
   },
