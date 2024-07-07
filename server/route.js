@@ -18,7 +18,7 @@ const ResetToken = require('./model/resettoken')
 const Order = require('./model/Order')
 // AWS S3 Configuration
 const bucketName = process.env.BUCKET_NAME;
-const bucketNameSec = process.env.BUCKET_NAMES;
+const bucketName2 = process.env.BUCKET_NAME2 || 'shoehaven-profile-upload' ;
 const bucketRegion = process.env.BUCKET_REGION;
 const accessKey = process.env.ACCES_KEY;
 const secretAccessKey = process.env.SECRET_ACCESS_KEY;
@@ -87,7 +87,7 @@ const upload = multer({
 const profileUpload = multer({
   storage: multerS3({
     s3,
-    bucket: bucketNameSec,
+    bucket: bucketName2,
     metadata: function (req, file, cb) {
       cb(null, { fieldName: file.fieldname });
     },
