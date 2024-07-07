@@ -29,11 +29,11 @@ app.use(session({
   saveUninitialized: true,
   store: MongoStore.create({ mongoUrl: process.env.MONGO_URI, ttl: 14 * 24 * 60 * 60 }),
   cookie: {
+    secure: true,
+    sameSite: 'none',
     maxAge: 1000 * 60 * 60 * 24 * 14,
-    httpOnly: true,
-    sameSite: 'None',
-    secure,
-  },
+    domain: '.domain.com'
+}
 }));
 
 // Routes
