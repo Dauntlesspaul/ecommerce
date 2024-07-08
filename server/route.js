@@ -1124,8 +1124,8 @@ const customer = await stripe.customers.create({
     line_items,
     discounts,
     mode: 'payment',
-    success_url: 'http://localhost:3000/success',
-    cancel_url: 'http://localhost:3000/cart',
+    success_url: `${process.env.BASE_URL}success`,
+    cancel_url: `${process.env.BASE_URL}cart`,
   });
 
   return res.send({url: session.url})

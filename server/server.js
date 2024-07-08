@@ -40,7 +40,6 @@ app.use(session({
 }));
 
 // Routes
-app.use('/api/stripe', require('./route'));
 app.use('/', require('./route'));
 
 app.listen(PORT, () => {
