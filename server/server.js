@@ -6,9 +6,11 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const cors = require('cors');
 const { connectDB } = require('./config/db');
+const webhookRoute = require('./webhook')
 const PORT = process.env.PORT || 8000;
 
 const app = express();
+
 
 app.enable('trust proxy');
 
@@ -23,8 +25,8 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
+app.use('/api/stripe/webhook', webhookRoute);
 
-app.use('/api/stripe', require('./route'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());

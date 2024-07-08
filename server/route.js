@@ -1131,60 +1131,7 @@ const customer = await stripe.customers.create({
   return res.send({url: session.url})
 })
 
-const endpointSecret = process.env.END_POINT_SECRET;
 
-router.post('/webhook', express.raw({type: 'application/json'}), async(request, response) => {
-  const sig = request.headers['stripe-signature'];
-
-  let event;
-
-  try {
-    event = stripe.webhooks.constructEvent(request.body, sig, endpointSecret);
-  
-  console.log('webhook verified')
-} catch (err) {
-  console.log(`Webhook Error: ${err.message}`)
-    response.status(400).send(`Webhook Error: ${err.message}`);
-    return;
-  }
-
-  if (event.type === 'checkout.session.completed') {
-    const session = event.data.object;
-
-    const customer = await stripe.customers.retrieve(session.customer);
-    const cartId = customer.metadata.cartId;
-
-    
-    const cart = await Cart.findById(cartId);
-
-    const order = new Order({
-      userId: customer.metadata.userId,
-      orderId: customer.metadata.orderId,
-      coupon: customer.metadata.coupon,
-      sessionId: session.id,
-      paymentMethodTypes: session.payment_method_types,
-      paymentStatus: session.payment_status,
-      amountTotal: session.amount_total,
-      amountSubtotal: session.amount_subtotal,
-      currency: session.currency,
-      shipping: session.shipping_details,
-      totalDetails: session.total_details,
-      customerDetails: session.customer_details,
-      cart: cart.items 
-    })
-    
-
-    try {
-      await order.save();
-    } catch (error) {
-      console.log('Error saving order:', error);
-    }
-    
-  await Cart.deleteOne({ userId: cart.userId})
-  }
-
-  response.send().end();
-});
 
 
 router.post('/create-checkout-cod', authenticateToken, async (req, res) => {
