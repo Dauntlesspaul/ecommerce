@@ -1,6 +1,7 @@
 require('dotenv').config();
 const stripe = require('stripe')(process.env.STRIPE_KEYS);
-const { Order, Cart } = require('./model'); 
+const Cart = require('./model/Cart')
+const Order = require('./model/Order')
 const endpointSecret = process.env.END_POINT_SECRET;
 
 exports.handleWebhook = async (req, res) => {
