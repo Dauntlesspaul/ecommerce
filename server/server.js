@@ -23,6 +23,8 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
+
+app.use('/api/stripe', require('./route'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
