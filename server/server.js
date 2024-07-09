@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const cors = require('cors');
+const {handleWebhook} = require('./webhookController')
 const { connectDB } = require('./config/db');
 const PORT = process.env.PORT || 8000;
 
@@ -15,7 +16,7 @@ app.enable('trust proxy');
 
 connectDB();
 
-app.use('/api/stripe/webhook', require('./webhook'))
+app.use('/api/stripe/webhook',express.raw({ type: 'application/json' }), handleWebhook)
 const corsOptions = {
   origin: 'https://shoe-haven.vercel.app',
   credentials: true,
