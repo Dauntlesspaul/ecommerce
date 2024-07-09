@@ -15,7 +15,7 @@ app.enable('trust proxy');
 
 connectDB();
 
-app.use('/api/stripe',require('./route'))
+app.use('/api/stripe/webhook', require('./webhook'))
 const corsOptions = {
   origin: 'https://shoe-haven.vercel.app',
   credentials: true,
