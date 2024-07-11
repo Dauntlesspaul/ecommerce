@@ -36,7 +36,7 @@ app.use(session({
   saveUninitialized: true,
   store: MongoStore.create({ mongoUrl: process.env.MONGO_URI, ttl: 14 * 24 * 60 * 60 }),
   cookie: {
-    domain: '.shoe-haven.vercel.app',
+    domain: 'shoe-haven.vercel.app',
     secure: true, 
     sameSite: 'none', 
     maxAge: 1000 * 60 * 60 * 24 * 14, 
