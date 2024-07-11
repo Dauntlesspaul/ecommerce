@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 8000;
 const app = express();
 
 
-app.enable('trust proxy');
+app.set('trust proxy', 1);
 
 connectDB();
 
