@@ -35,10 +35,7 @@ app.use(session({
   resave: false,
   saveUninitialized: true,
   store: MongoStore.create({ mongoUrl: process.env.MONGO_URI, ttl: 14 * 24 * 60 * 60 }),
-  cookie: {
-    domain: '.vercel.app',
-    secure: true, 
-    sameSite: 'none', 
+  cookie: { 
     maxAge: 1000 * 60 * 60 * 24 * 14, 
   }
 }));
