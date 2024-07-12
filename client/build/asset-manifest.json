@@ -1,0 +1,38 @@
+{
+  "files": {
+    "main.css": "/static/css/main.e4ffc193.css",
+    "main.js": "/static/js/main.06f1337e.js",
+    "static/js/453.258b012d.chunk.js": "/static/js/453.258b012d.chunk.js",
+    "static/media/advert.jpg": "/static/media/advert.fed2ff7cd9e835a451fb.jpg",
+    "static/media/men.jpg": "/static/media/men.856ef1a2e0df0fae73d8.jpg",
+    "static/media/women.jpg": "/static/media/women.181f984a07bb4cd863a7.jpg",
+    "static/media/google.png": "/static/media/google.85948811cb56223e2ced.png",
+    "static/media/broguewallpaper.jpg": "/static/media/broguewallpaper.e015f55c27745ee02152.jpg",
+    "static/media/gogle.png": "/static/media/gogle.1c133034e24abc3b2a5a.png",
+    "static/media/newcod.png": "/static/media/newcod.bc65186f20b8acf97569.png",
+    "static/media/layerbg1.jpg": "/static/media/layerbg1.135d85e8816ab865cef5.jpg",
+    "static/media/apple.png": "/static/media/apple.c4e4d7958329749b9c5a.png",
+    "static/media/error-2-126514.mp3": "/static/media/error-2-126514.68bacdfdbf6f7e34fcd6.mp3",
+    "static/media/verve.jpg": "/static/media/verve.d3dee7e034e7e2a2f955.jpg",
+    "static/media/like.mp3": "/static/media/like.e2e956cec8e665fdac87.mp3",
+    "static/media/frame.jpg": "/static/media/frame.e644de57d43ed76a22c4.jpg",
+    "static/media/pay-with-stripe.png": "/static/media/pay-with-stripe.d1eeef6e28e6f0bb6d38.png",
+    "static/media/wishlist.jpg": "/static/media/wishlist.6c988b2063f635d5ff71.jpg",
+    "static/media/success.mp3": "/static/media/success.fec2b23f07f1802f3e94.mp3",
+    "static/media/shlogo1.png": "/static/media/shlogo1.09181a74e77e23325fff.png",
+    "static/media/error.mp3": "/static/media/error.d73a48979f61f8154e1c.mp3",
+    "static/media/empty.png": "/static/media/empty.c2fe3b3f24293bf45ec5.png",
+    "static/media/tap-notification-180637.mp3": "/static/media/tap-notification-180637.26371742bcb64f25256e.mp3",
+    "static/media/star-icon.svg": "/static/media/star-icon.4ea60ea28f8b5c31d6ea585febafd66b.svg",
+    "static/media/star-half-icon.svg": "/static/media/star-half-icon.6985ef0f49e4da388fc951690f6292e3.svg",
+    "index.html": "/index.html",
+    "static/media/star-full-icon.svg": "/static/media/star-full-icon.d3f201b8471ba38d73d08fb45a4b2226.svg",
+    "main.e4ffc193.css.map": "/static/css/main.e4ffc193.css.map",
+    "main.06f1337e.js.map": "/static/js/main.06f1337e.js.map",
+    "453.258b012d.chunk.js.map": "/static/js/453.258b012d.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e4ffc193.css",
+    "static/js/main.06f1337e.js"
+  ]
+}
