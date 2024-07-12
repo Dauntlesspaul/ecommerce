@@ -36,14 +36,15 @@ app.use(session({
   saveUninitialized: true,
   store: MongoStore.create({ mongoUrl: process.env.MONGO_URI, ttl: 14 * 24 * 60 * 60 }),
   cookie: {
-    httpOnly: false,
-    sameSite: 'Lax', 
+    domain: '.vercel.app',
+    secure: true, 
+    sameSite: 'none', 
     maxAge: 1000 * 60 * 60 * 24 * 14, 
   }
 }));
 
 
-app.use('/', require('./route'));
+app.use('/api', require('./route'));
 
 app.listen(PORT, () => {
   console.log(`App is running at port ${PORT}`);
