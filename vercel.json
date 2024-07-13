@@ -1,3 +1,4 @@
+
 {
   "version": 2,
   "builds": [
@@ -19,8 +20,8 @@
       "dest": "/server/server.js"
     },
     {
-      "src": "/(.*)",
-      "dest": "/client/$1"
+      "src": "/((?!api).*)",
+      "dest": "/client/build/$1"
     }
   ]
 }
