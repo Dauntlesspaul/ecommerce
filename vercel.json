@@ -1,19 +1,19 @@
 {
   "builds": [
     {
-      "source": "client/package.json",
+      "src": "client/package.json",
       "use": "@vercel/static-build",
       "config": {
         "distDir": "client/build"
       }
     },
     {
-      "source": "server/server.js",
+      "src": "server/server.js",
       "use": "@vercel/node"
     }
   ],
   "routes": [
-    { "source": "/server/(.*)", "destination": "/api/server.js" },
-    { "source": "/(.*)", "destination": "client/build/$1" }
+    { "src": "/server/(.*)", "dest": "/server/server.js" },
+    { "src": "/(.*)", "dest": "/client/build/$1" }
   ]
 }
