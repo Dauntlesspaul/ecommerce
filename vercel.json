@@ -20,7 +20,7 @@
       "dest": "/server/server.js"
     },
     {
-      "src": "/static/(.*)",
+      "src": "^/static/(.*)",
       "dest": "/client/build/static/$1"
     },
     {
