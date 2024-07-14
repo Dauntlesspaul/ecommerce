@@ -1,4 +1,3 @@
-
 {
   "version": 2,
   "builds": [
@@ -20,16 +19,20 @@
       "dest": "/server/server.js"
     },
     {
-      "src": "^/static/(.*)",
-      "dest": "/client/build/static/$1"
+      "src": "/static/(.*)",
+      "dest": "/static/$1"
     },
     {
       "src": "/(.*)\\.png",
-      "dest": "/client/build/$1.png"
+      "dest": "/$1.png"
+    },
+    {
+      "src": "/(.*)\\.jpg",
+      "dest": "/$1.jpg"
     },
     {
       "src": "/(.*)",
-      "dest": "/client/build/index.html"
+      "dest": "/index.html"
     }
   ]
 }
