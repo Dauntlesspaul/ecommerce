@@ -42,16 +42,9 @@ app.use(session({
   }
 }));
 
-
+app.use(express.static(path.join(__dirname, 'public')));
 app.use('/api', require('./route'));
 
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '..', 'client', 'build')));
-
-  app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, '..', 'client', 'build', 'index.html'));
-  });
-}
 
 app.listen(PORT, () => {
   console.log(`App is running at port ${PORT}`);
