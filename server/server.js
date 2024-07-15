@@ -43,9 +43,14 @@ app.use(session({
   }
 }));
 
-app.use(express.static(path.join(__dirname, 'public')));
 app.use('/api', require('./route'));
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, '../client/build')));
 
+// Catch-all handler to serve the React app for any other routes
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+});
 
 app.listen(PORT, () => {
   console.log(`App is running at port ${PORT}`);
