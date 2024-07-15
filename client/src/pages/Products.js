@@ -377,16 +377,7 @@ const Products = () => {
            
             <h2 className='md:my-3 text-xl md:text-2xl font-medium mt-8'>You may also like</h2>
           </div>
-          {loading && <div className="w-full box-border flex justify-center">
-            <div className='flex flex-wrap w-fit self-center justify-evenly'>
-              <CustomSkeleton cards={4}/>
-            </div>
-          </div>}
-          <div className="w-fit box-border ">
-            <div className='flex flex-wrap w-fit self-center justify-evenly'>
-              {!loading && <Relatedproducts data={data} updateCart={updateCart} wishList={wishList} wishlist={wishlist}/>}
-            </div>
-          </div>
+         
           <ToastContainer/>
         </div>
         <DraggableCartButton cart={cart}/>
