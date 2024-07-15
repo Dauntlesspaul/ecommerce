@@ -44,7 +44,6 @@ app.use(session({
 }));
 
 app.use('/api', require('./route'));
-// Serve static files from the React app
 app.use(express.static(path.join(__dirname, '../client/build')));
 
 // Catch-all handler to serve the React app for any other routes

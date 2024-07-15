@@ -20,27 +20,27 @@
     },
     {
       "src": "/static/(.*)",
-      "dest": "/client/build/static/$1"
+      "dest": "/client/static/$1"
     },
     {
       "src": "/(.*)\\.js",
-      "dest": "/client/build/$1.js"
+      "dest": "/client/$1.js"
     },
     {
       "src": "/(.*)\\.css",
-      "dest": "/client/build/$1.css"
+      "dest": "/client/$1.css"
     },
     {
       "src": "/(.*)\\.png",
-      "dest": "/client/build/$1.png"
+      "dest": "/client/$1.png"
     },
     {
       "src": "/(.*)\\.jpg",
-      "dest": "/client/build/$1.jpg"
+      "dest": "/client/$1.jpg"
     },
     {
       "src": "/(.*)",
-      "dest": "/client/build/index.html"
+      "dest": "/client/index.html"
     }
   ]
 }
