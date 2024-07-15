@@ -19,25 +19,13 @@
       "dest": "/server/server.js"
     },
     {
-      "src": "/static/(.*)",
+      "src": "^/static/(.*)",
       "dest": "/client/static/$1"
     },
     {
-      "src": "/(.*)\\.js",
-      "dest": "/client/$1.js"
-    },
-    {
-      "src": "/(.*)\\.css",
-      "dest": "/client/$1.css"
-    },
-    {
-      "src": "/(.*)\\.png",
-      "dest": "/client/$1.png"
-    },
-    {
-      "src": "/(.*)\\.jpg",
-      "dest": "/client/$1.jpg"
-    },
+       "src": "/(.*)\\.png",
+       "dest": "/client/$1.png"
+     },
     {
       "src": "/(.*)",
       "dest": "/client/index.html"
