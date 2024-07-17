@@ -230,7 +230,7 @@ const Products = () => {
               </div>
 
             <div className=' px-2 '>
-              <div className='w-10/12 h-6 md:mt-4 lg:mb-6 '>{ loading ? <Skeleton className='h-full'/> 
+              <div className='w-10/12 h-6 md:mt-2 lg:mb-4 '>{ loading ? <Skeleton className='h-full'/> 
               : <h2 className='text-xl lg:text-2xl font-medium'>{brandname}</h2>}
               </div>
               {loading ? <ProductSkeleton/> :

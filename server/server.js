@@ -34,7 +34,7 @@ app.use(cookieParser());
 app.use(session({
   secret: 'keyboard mouse',
   resave: false,
-  saveUninitialized: true,
+  saveUninitialized: false,
   store: MongoStore.create({ mongoUrl: process.env.MONGO_URI, ttl: 14 * 24 * 60 * 60 }),
   cookie: {
     secure: true, 
