@@ -100,8 +100,8 @@ const handleClearCart = () =>{
                 <div className='grid place-items-center  my-7'>
                     <div className='w-full lg:w-8/12  md:flex '>
                         <div className='w-full grid place-items-center md:h-fit p-3'>
-                           <div className=' shadow-md text-black place-self-start 2xl:px-16 px-[4%] text-3xl font-bold flex justify-between w-full items-center'> 
-                            <h2>Cart <span className=' text-gray-500 text-xl'>{cart.length} ITEMS</span></h2>
+                           <div className=' shadow-sm text-black place-self-center max-w-[700px] px-2 text-2xl font-bold flex justify-between w-full items-center'> 
+                            <h2>Cart <span className=' text-gray-500 text-lg'>{cart.length} ITEMS</span></h2>
                              <span> 
                                  <IconButton
                                     onClick={handleClickOpen} 
@@ -156,7 +156,7 @@ const handleClearCart = () =>{
                                     justifyContent: 'center',
                                   }
                                 return (
-                                    <div key={i} className='w-11/12 max-w-[700px]  p-3 my-2 shadow-md shadow-gray-200 flex justify-between'>
+                                    <div key={i} className='w-full mx-2 max-w-[700px]  p-3 my-2 shadow-md shadow-gray-200 flex justify-between'>
                                         <div className=' lg:w-44 lg:h-36 w-28 h-20 mr-3'><img className='w-full h-full' src={selector.imgurl} alt="" /></div>
                                         <div className='md:flex md:justify-between w-full '>
                                             <div className='w-full'>

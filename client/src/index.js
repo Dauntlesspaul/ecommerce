@@ -5,8 +5,8 @@ import LandingPage from './pages/LandingPage';
 import Layout from './components/Layout';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter,Routes,Route} from 'react-router-dom'
+import NotFound from './pages/NotFound.js';
 import Login from './pages/Login';
-import Post from './pages/Post'
 import Cart from './pages/Cart';
 import Store from './pages/Store'
 import Men from './pages/Men'
@@ -42,7 +42,6 @@ root.render(
     <Route path='/login' element={<Login/>}/>
     <Route path='/forgot-password' element={<ForgotPassword/>}/>
     <Route path="users/:id/:email/reset-link/:token" element={<ChangePassword/>} />
-    <Route path='/post' element={<Post/>}/>
     <Route path='/cart' element={<Cart/>}/>
     <Route path='/success' element={<SuccessPage/>}/>
     <Route path='/wishlist' element={<Wishlist/>}/>
@@ -61,6 +60,7 @@ root.render(
     <Route path="/:anypath/products/:name" element={<Products />} />
     <Route path="/signup" element={<Signup/>} />
     <Route path="/allproducts" element={<Store/>} />
+    <Route path="*" element={<NotFound/>} />
     </Route>
     <Route path="users/:id/verify/:token" element={<EmailVerification/>} />
    </Routes>

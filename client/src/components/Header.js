@@ -109,8 +109,8 @@ function Header({ cartCount, wishlistCount}) {
                     <Tab value="/" label="Home" wrapped ref={homeRef} />
                     <Tab value="/men" label="Men" />
                     <Tab value="/women" label="Women" />
-                    <Tab value="/about" label="About" />
-                    <Tab value="/contact" label="Contact Us" />
+                    <Tab label="About" />
+                    <Tab label="Contact Us" />
                   </Tabs>
                 </Box>
               </ul>
@@ -154,38 +154,56 @@ function Header({ cartCount, wishlistCount}) {
           className="md:hidden w-full h-0 overflow-hidden grid place-items-center transition-height duration-500 ease-linear bg-gray-100 relative right-0"
         >
           <nav className="w-full">
-            <ul className="flex w-11/12 font-semibold justify-evenly">
-              <Box sx={{ width: '100%' }}>
-                <Tabs
-                  value={value}
-                  onChange={handleChange}
-                  aria-label="wrapped label tabs example"
-                  TabIndicatorProps={{
-                    style: {
-                      backgroundColor: 'black',
-                    },
-                  }}
-                  sx={{
-                    '& .MuiTab-root': {
-                      color: '#5F6060',
-                      fontWeight: '700',
-                      '&:hover': {
-                        color: 'white',
-                      },
-                      '&.Mui-selected': {
-                        color: 'black',
-                      },
-                    },
-                  }}
-                >
-                  <Tab value="/" label="Home" ref={homeRef} />
-                  <Tab value="/men" label="Men" />
-                  <Tab value="/women" label="Women" />
-                  <Tab value="/about" label="About" />
-                  <Tab value="/contact" label="Contact Us" />
-                </Tabs>
-              </Box>
-            </ul>
+          <Box className="container mx-auto max-w-screen-xl px-4">
+        <Box sx={{ width: '100%' }}>
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            aria-label="wrapped label tabs example"
+            TabIndicatorProps={{
+              style: {
+                backgroundColor: 'black',
+              },
+            }}
+            variant="scrollable"
+            scrollButtons="auto"
+            sx={{
+              '& .MuiTab-root': {
+                color: '#5F6060',
+                fontWeight: '700',
+                '&.Mui-selected': {
+                  color: 'black',
+                },
+                padding: {
+                  xs: '0 4px', 
+                  sm: '0 8px', 
+                  md: '0 12px', 
+                  lg: '0 16px', 
+                },
+                margin: {
+                  xs: '0 2px', 
+                  sm: '0 4px', 
+                  md: '0 6px', 
+                  lg: '0 8px', 
+                },
+                minWidth: 0, 
+              },
+              '& .MuiTabs-scroller': {
+                overflow: 'hidden',
+              },
+              '& .MuiTabs-flexContainer': {
+                justifyContent: 'space-between', 
+              },
+            }}
+          >
+            <Tab value="/" label="Home" ref={homeRef} />
+            <Tab value="/men" label="Men" />
+            <Tab value="/women" label="Women" />
+            <Tab  label="About" />
+            <Tab  label="Contact Us" />
+          </Tabs>
+        </Box>
+      </Box>
           </nav>
         </div>
       </div>

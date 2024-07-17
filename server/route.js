@@ -75,7 +75,7 @@ const upload = multer({
     s3,
     bucket: bucketName,
     metadata: function (req, file, cb) {
-      cb(null, { fieldName: file.fieldname });
+      cb(null, { fieldName: file.fieldname ,  contentType: 'image/png'});
     },
     key: function (req, file, cb) {
      
@@ -129,6 +129,38 @@ router.post('/upload', uploadMiddleware, async (req, res) => {
     return res.status(500).send('Internal Server Error');
   }
 })
+
+/*router.post('/upload-imgs', upload.array('files', 10), async (req, res) => {
+  try {
+   
+    const imageUrls = req.files.map(file => file.location);
+
+    
+    const product = await Newitems.findOne({ brand: req.body.productName });
+
+   
+    if (product && product.imageurl) {
+     
+      imageUrls.unshift(product.imageurl);
+    }
+
+   
+    const result = await Newitems.updateOne(
+      { brand: req.body.productName }, 
+      { $set: { imageUrls: imageUrls } }, 
+      { upsert: true }
+    );
+
+    console.log('New items added to the database!');
+
+    return res.json({ message: 'File received', result });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).send('Internal Server Error');
+  }
+});
+*/
+
 
 router.post('/profile-upload',profileUpload, authenticateToken, async(req, res) => {
     try {

@@ -190,6 +190,7 @@ function MyOrder() {
                     <h2 className='font-semibold'>Customer Name: <span className='font-normal'>{item.customerDetails.name}</span></h2>
                     <h2 className='font-semibold'>Email: <span className='font-normal'>{item.customerDetails.email}</span></h2>
                     <h2 className='font-semibold'>Delivery Status: <span className='text-red-500'>{item.deliveryStatus}</span></h2>
+                    <h2 className='font-semibold'>Order Date: <span className='text-red-500'>{deliveryDate1(item.createdAt) }</span></h2>
                     <h2 className='font-semibold'>Delivery Date: <span className='font-normal'>{item.totalDetails.amount_shipping / 100 === 0 ? deliveryDate5(item.createdAt) + ` - ` + deliveryDate7(item.createdAt) : item.totalDetails.amount_shipping / 100 === 15 ? deliveryDate1(item.createdAt) : deliveryDate2(item.createdAt)}</span></h2>
                     <div>
                       {

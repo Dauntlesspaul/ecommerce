@@ -48,6 +48,7 @@ const Products = () => {
   const [comments, setComments] = useState([])
   const [commenting, setCommenting] = useState(false)
   const [online, setOnline] = useState(null)
+  const [imageIndex, setImageIndex] = useState(0)
 
   const handleRatingChange = (event, newValue) => {
     setValue(Math.max(newValue, 1));
@@ -163,6 +164,9 @@ const Products = () => {
       console.log(error)
     }
   }
+  const handleImageChange = (index) => {
+    setImageIndex(index);
+  };
 
   return (<>
   
@@ -174,7 +178,7 @@ const Products = () => {
     <div className='mb-8 px-1 box-border '>
       <div className='flex justify-center xl:px-32'>
         <div className='w-fit'>
-          <div  className=' md:my-7 my-4 w-full px-[3%]'>
+          <div  className=' md:my-7 my-4 w-full px-2 max-w-5xl'>
           <Button onClick={()=> navigate(-1)}
           sx={{
             backgroundColor: "#E5E6E7 ",
@@ -189,24 +193,53 @@ const Products = () => {
             <FontAwesomeIcon className='text-sm mr-1 text-slate-600 ' icon="fa-solid fa-arrow-left" />Back
           </Button>
           </div>
-          <div className='md:flex max-w-5xl'>
-            <div className="image-container flex justify-center md:w-fit md:mx-4 w-full my-4">
-              <div className='w-11/12 md:w-96 h-[378px] shadow-md shadow-slate-300'>
-                {loading && <Skeleton className='w-full h-full'/>}
-                {!loading && <img className='w-full h-full' src={data.data[0].imageurl} alt=''/>}
-              </div>
+          <div className='md:flex w-full max-w-5xl'>
+            <div className='md:flex px-3'>
+            <div className="flex justify-center md:h-[378px] md:w-20 w-full">
+              {!loading && <div className="flex justify-center items-center flex-wrap ">
+                    {data.data[0].imageUrls.map((imageUrl, index) => (
+                      <img
+                        key={index}
+                        src={imageUrl}
+                        alt='img'
+                        className={`w-16 h-16 object-cover cursor-pointer ${
+                          index === imageIndex ? 'border-2 border-black' : 'border-2 border-gray-200'
+                        } rounded-md mx-2 mt-2`}
+                        onClick={() => handleImageChange(index)}
+                      />
+                    ))}
+                  </div>
+                  }
+                {
+                  loading && <div className="flex justify-center items-center flex-wrap ">
+                     {Array.from({ length: 3 }).map((_, index) => (
+                      <div className='object-cover rounded-md w-16 h-16 mx-2 mt-2'>
+                      <Skeleton
+                        key={index}
+                        className='w-full h-full'
+                      />
+                      </div>
+                    ))}
+                  </div>
+                }
             </div>
+            <div className='w-full md:w-96 h-[378px] border-2 border-gray-200 my-2 overflow-y-hidden grid place-items-center'>
+                {loading && <div className='w-full  h-full overflow-hidden' ><Skeleton className='w-full h-full'/></div>}
+                {!loading && <img className='w-auto h-auto max-h-[378px]' src={data.data[0].imageUrls[imageIndex]} alt=''/>}
+              </div>
+              </div>
+
             <div className=' px-2 '>
               <div className='w-10/12 h-6 md:mt-4 lg:mb-6 '>{ loading ? <Skeleton className='h-full'/> 
-              : <h2 className='text-xl lg:text-4xl font-medium'>{brandname}</h2>}
+              : <h2 className='text-xl lg:text-2xl font-medium'>{brandname}</h2>}
               </div>
               {loading ? <ProductSkeleton/> :
-              <> <hr className='my-2 border-t-[1px]  border-[#d8d8d8]'/>
-                <h2 className='text-md md:text-xl font-semibold'><DescriptionOutlinedIcon/> Product Description</h2>
-                {!loading && <p className='md:text-lg text-[#808080]'>{data.data[0].description}</p>}
+              <> <hr className='my-2 border-t-[1px]  border-[#474747]'/>
+                <h2 className='text-base  font-semibold'><DescriptionOutlinedIcon/> Product Description</h2>
+                {!loading && <p className=' text-[#808080]'>{data.data[0].description}</p>}
        
                 <hr className='my-2 border-t-[1px]  border-[#d8d8d8]'/>
-                <h2 className='text-md font-semibold md:text-xl'><AttachMoneyIcon/> Price</h2>
+                <h2 className='text-base font-semibold '><AttachMoneyIcon/> Price</h2>
                 {!loading && <div className='flex items-center'>
                   <span className=' line-through text-sm text-gray-400 mr-2 md:text-lg'>${data.data[0].price}.00</span>
                   <span className='mr-3 md:text-lg'>${data.data[0].discountprice}.00</span>
@@ -215,8 +248,8 @@ const Products = () => {
                   </span>
                 </div>}
                 <hr className='my-2 border-t-[1px]  border-[#d8d8d8]'/>
-                <h2 className='text-md font-semibold md:text-xl'><StoreOutlinedIcon/> Availability</h2>
-                {!loading && <h2 className='text-md md:text-lg text-[#808080]'>{data.data[0].units} (units) </h2>}
+                <h2 className='text-base font-semibold '><StoreOutlinedIcon/> Availability</h2>
+                {!loading && <h2 className='text-base md:text-lg text-[#808080]'>{data.data[0].units} (units) </h2>}
                 <hr className='my-2 border-t-[1px]  border-[#d8d8d8]'/>
                 { !include ? 
                   <button
@@ -238,7 +271,7 @@ const Products = () => {
           </div>
           <div className='w-full px-2 max-w-5xl'>
            {!loading && <RateMe rate={data.data[0].rating} />}
-            <h2 className=' md:my-3 text-xl md:text-2xl font-medium mt-8'>Reviews</h2>
+            <h2 className=' md:my-3 text-xl font-medium mt-8'>Reviews</h2>
             <div className=' '>
             <hr className='my-2 border-t-[1px]  border-[#d8d8d8]'/>
 
@@ -251,7 +284,7 @@ const Products = () => {
                   <img src={profilepic3} alt="profile" className="object-cover h-full w-full" />
                 </div>
                 <div className='flex items-center ml-2'> 
-                  <span className='text-md  font-semibold text-black'>Martha Cynthia</span>
+                  <span className='text-base  font-semibold text-black'>Martha Cynthia</span>
                       <VerifiedIcon sx={{ color:"blue", fontSize: '16px', marginLeft: '3px'}} />
                   </div>
                 </div>
@@ -268,7 +301,7 @@ const Products = () => {
                   <img src={profilepic2} alt="profile" className="object-cover h-full w-full" />
                 </div>
                 <div className='flex items-center ml-2'> 
-                  <span className='text-md  font-semibold text-black'>Sarah Duke</span>
+                  <span className='text-base  font-semibold text-black'>Sarah Duke</span>
                    <VerifiedIcon sx={{ color:"blue", fontSize: '16px', marginLeft: '3px'}} />
                   </div>
                 </div>
@@ -285,7 +318,7 @@ const Products = () => {
                   <img src={profilepic1} alt="profile" className="object-cover h-full w-full" />
                 </div>
                 <div className='flex items-center ml-2'> 
-                  <span className='text-md  font-semibold text-black'>Paul Cregs</span>
+                  <span className='text-base  font-semibold text-black'>Paul Cregs</span>
                       <VerifiedIcon sx={{ color:"blue", fontSize: '16px', marginLeft: '3px'}} />
                   </div>
                 </div>
@@ -306,7 +339,7 @@ const Products = () => {
                       </div>
                       <div className='flex items-center ml-2 flex-1 justify-between'>
                         <div className='flex items-center '>
-                          <h2 className='text-md font-semibold text-black whitespace-nowrap overflow-hidden text-ellipsis'>
+                          <h2 className='text-base font-semibold text-black whitespace-nowrap overflow-hidden text-ellipsis'>
                             {selector.user.firstname + ' ' + selector.user.lastname}
                           </h2>
                           {verifiedBuyer && <VerifiedIcon sx={{ color: "blue", fontSize: '16px', ml: 1 }} />}
@@ -327,7 +360,7 @@ const Products = () => {
               </div>
 
               <div className='my-6'>
-              <h2 className=' md:my-3 text-lg md:text-2xl font-medium mt-8'><RateReviewOutlinedIcon sx={{ fontSize: '26px'}}/> Write a review</h2>
+              <h2 className=' md:my-3 text-lg md:text-xl font-medium mt-8'><RateReviewOutlinedIcon sx={{ fontSize: '24px'}}/> Write a review</h2>
                {!online ? 
                <>
                <hr className='my-2 border-t-[1px]  border-[#d8d8d8]'/>
@@ -375,7 +408,7 @@ const Products = () => {
 
             </div>
            
-            <h2 className='md:my-3 text-xl md:text-2xl font-medium mt-8'>You may also like</h2>
+            <h2 className='md:my-3 text-xl font-medium mt-8'>You may also like</h2>
           </div>
           {loading && <div className="w-full box-border flex justify-center">
             <div className='flex flex-wrap w-fit self-center justify-evenly'>

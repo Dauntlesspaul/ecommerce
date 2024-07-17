@@ -38,6 +38,10 @@ rating: {
     type: String,
     required: true
  },
+ imageUrls: [{
+    type: String,
+    required: true
+  }],
  comments: [{
     type: Schema.Types.ObjectId,
     ref: 'Comment'

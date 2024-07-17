@@ -95,7 +95,7 @@ function Footer({toast, soundSuccess}) {
    <div className='w-full flex justify-between max-w-[500px] lg:max-w-full xl:w-[1000px] lg:w-[800px]'>
      <div className='lg:flex lg:w-[350px] xl:w-[410px] lg:justify-between '>
     <div className='h-max w-max'>
-      <h2 className='text-white  md:text-base text-sm '>Information</h2>
+      <h2 className='text-white md:mb-0 md:text-base text-sm mb-1 '>Information</h2>
       <ul className='text-[gray] md:text-base text-sm space-y-2'>
         <li>My Account</li>
         <li className='hover:text-white'>About Us</li>
@@ -107,7 +107,7 @@ function Footer({toast, soundSuccess}) {
       </ul>
     </div>
     <div className='h-max w-max mt-2'>
-      <h2 className='text-white md:text-base text-sm  '>Popular Products</h2>
+      <h2 className='text-white md:mb-0 md:text-base text-sm mb-1'>Popular Products</h2>
         <ul className='text-[gray] space-y-2 md:text-base text-sm '>
           <li className='hover:text-white'>Giuseppe Zanotti</li>
           <li className='hover:text-white'>Versace</li>
@@ -118,15 +118,15 @@ function Footer({toast, soundSuccess}) {
     </div>
     <div className='lg:flex lg:w-[350px] xl:w-[410px] lg:justify-between'>
     <div className=' h-max w-max'>
-      <h2 className='text-white md:text-base text-sm '>Categories</h2>
+      <h2 className='text-white md:mb-0 md:text-base text-sm mb-1'>Categories</h2>
       <ul className=' text-[gray] space-y-2 md:text-base text-sm '>
         <li className='hover:text-white'>Men</li>
         <li className='hover:text-white'>Women</li>
         <li className='hover:text-white'>Top-sellers</li>
       </ul>
       </div>
-    <div className='h-max w-max'>
-      <h2 className='text-white md:text-base text-sm mt-2 '>Customer Services</h2>
+    <div className='h-max w-max mt-2'>
+      <h2 className='text-white md:mb-0 md:text-base text-sm mb-1'>Customer Services</h2>
         <ul className='text-[gray] md:text-base text-sm space-y-2 '>
           <li className='hover:text-white'>Help Center</li>
           <li className='hover:text-white'>Chat With Us</li>
@@ -150,7 +150,7 @@ function Footer({toast, soundSuccess}) {
     </div>
       <hr className='mt-4'/>
       <div className='flex justify-center items-center'>
-      <span><FontAwesomeIcon className='text-white lg:text-md mt-2 text-sm' icon="fa-regular fa-copyright" /></span><h2 className='ml-2 text-sm text-white font-medium mt-1'> 2024 Shoe Haven All rights reserved.</h2>
+      <span><FontAwesomeIcon className='text-white md:text-sm lg:text-md mt-2 text-xs' icon="fa-regular fa-copyright" /></span><h2 className='ml-2 text-xs md:text-sm text-white font-medium mt-1'> 2024 Shoe Haven All rights reserved.</h2>
       </div>
       </div>
       </>
