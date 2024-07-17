@@ -3,6 +3,7 @@ import { Outlet } from 'react-router-dom';
 import Header from './Header';
 import Footer from './Footer';
 import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { useLocalStorage, useLocalStorageWishlist } from './useLocalStorageHook';
 import soundUrl from '../assets/sounds/success.mp3';
 import soundFailUrl from '../assets/sounds/error.mp3';
