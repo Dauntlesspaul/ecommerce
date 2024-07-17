@@ -20,7 +20,7 @@ const Order = require('./model/Order')
 const bucketName = process.env.BUCKET_NAME;
 const bucketNameSecond = process.env.BUCKET_NAME_SEC;
 const bucketRegion = process.env.BUCKET_REGION;
-const accessKey = process.env.ACCES_KEY;
+const accessKey = process.env.ACCESS_KEY;
 const secretAccessKey = process.env.SECRET_ACCESS_KEY;
 
 const s3 = new S3Client({
