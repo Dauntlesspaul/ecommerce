@@ -234,7 +234,7 @@ const Products = () => {
               : <h2 className='text-xl lg:text-2xl font-medium'>{brandname}</h2>}
               </div>
               {loading ? <ProductSkeleton/> :
-              <> <hr className='my-2 border-t-[1px]  border-[#474747]'/>
+              <> <hr className='my-2 border-t-[1px] border-[#d8d8d8]'/>
                 <h2 className='text-base  font-semibold'><DescriptionOutlinedIcon/> Product Description</h2>
                 {!loading && <p className=' text-[#808080]'>{data.data[0].description}</p>}
        
