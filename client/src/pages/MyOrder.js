@@ -204,9 +204,9 @@ function MyOrder() {
                             <div>
                               {<>
                                 <h2>{items.brand}</h2>
-                                <p>Price: $ {(Number(items.discountprice)).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</p>
-                                <p>Quantity: {items.selected}</p>
-                                <p>Size(s): {items.sizeIndex.map(size=> ' ' + items.size[size]) + ','}</p>
+                                <p><span className='font-medium'>Price:</span> ${(Number(items.discountprice)).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</p>
+                                <p><span className='font-medium'>Quantity:</span> {items.selected}</p>
+                                <p><span className='font-medium'>Size(s):</span> {items.sizeIndex.map(size=> ' ' + items.size[size]) + ','}</p>
                               </>}
                             </div>
                             </div>
