@@ -28,6 +28,7 @@ const ImageSlider = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            loading="lazy"
             transition={{ duration: 1 }}
             className="slider-image"
           />

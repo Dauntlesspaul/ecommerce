@@ -161,7 +161,7 @@ function SearchResults() {
                         </div>
                         <div className='overflow-hidden'>
                         <Link to={`/men/products/${results.brand.replace(/[\s]/, '-')}`}>
-                        <img className="2xl:h-64 xl:h-56 lg:h-48 w-full h-40 z-0 transition-transform duration-300 transform hover:scale-150" src={results.imageurl}  alt=""/>
+                        <img className="2xl:h-64 xl:h-56 lg:h-48 w-full h-40 z-0 transition-transform duration-300 transform hover:scale-150" src={results.imageurl}  alt="" loading='lazy'/>
                         </Link>
                         </div>
                         <Button 

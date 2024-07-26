@@ -117,7 +117,7 @@ const handleClearCart = () =>{
                                 aria-labelledby="alert-dialog-title"
                                 aria-describedby="alert-dialog-description"
                                 >
-                                <DialogTitle  sx={{padding: '14px 12px', fontSize: '17px'}} id="alert-dialog-title">
+                                <DialogTitle  sx={{padding: '25px 18px', fontSize: '18px'}} id="alert-dialog-title">
                                     {"Are you sure you want to clear cart ?"}
                                 </DialogTitle>
                                 <DialogActions>
@@ -157,7 +157,7 @@ const handleClearCart = () =>{
                                   }
                                 return (
                                     <div key={i} className='w-full mx-2 max-w-[700px]  p-3 my-2 shadow-md shadow-gray-200 flex justify-between'>
-                                        <div className=' lg:w-44 lg:h-36 w-28 h-20 mr-3'><img className='w-full h-full' src={selector.imgurl} alt="" /></div>
+                                        <div className=' lg:w-44 lg:h-36 w-28 h-20 mr-3'><img className='w-full h-full' src={selector.imgurl} alt="" loading='lazy'/></div>
                                         <div className='md:flex md:justify-between w-full '>
                                             <div className='w-full'>
                                                 <span className='text-base text-black font-semibold md:text-lg'>{selector.brand.split(' ').map(capitalize => capitalize[0].toUpperCase() + capitalize.slice(1)).join(' ')}</span>

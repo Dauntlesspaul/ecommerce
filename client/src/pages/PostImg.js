@@ -13,8 +13,8 @@ const axiosInstance = axios.create({
 
 const MyForms = () => {
   const [formData, setFormData] = useState({
-    files: [], // State to hold multiple files
-    productName: '', // State to hold product name
+    files: [], 
+    productName: '', 
   });
   const [loader, setLoader] = useState(false);
 
@@ -23,14 +23,14 @@ const MyForms = () => {
 
     try {
       const formDataObject = new FormData();
-      // Append each file to FormData
+      
       formData.files.forEach(file => {
         formDataObject.append('files', file);
       });
-      // Append product name to FormData
+    
       formDataObject.append('productName', formData.productName);
 
-      setLoader(true); // Set loader to true on form submission
+      setLoader(true); 
 
       await axiosInstance.post('/upload-imgs', formDataObject)
         .then((response) => {
@@ -41,7 +41,7 @@ const MyForms = () => {
           console.error('Error submitting form:', err);
         })
         .finally(() => {
-          setLoader(false); // Reset loader after submission
+          setLoader(false); 
         });
     } catch (error) {
       console.error('Form submission failed!', error);
@@ -49,7 +49,7 @@ const MyForms = () => {
   };
 
   const handleFileChange = (event) => {
-    const files = Array.from(event.target.files); // Convert FileList to Array
+    const files = Array.from(event.target.files); 
     setFormData({
       ...formData,
       files: files,
@@ -66,8 +66,8 @@ const MyForms = () => {
 
   const resetForm = () => {
     setFormData({
-      files: [], // Reset files state
-      productName: '', // Reset product name state
+      files: [], 
+      productName: '',
     });
   };
 
@@ -85,7 +85,7 @@ const MyForms = () => {
           name="files"
           onChange={handleFileChange}
           className='mb-2'
-          multiple // Allow multiple file selection
+          multiple 
           required
           accept='image/*'
         />

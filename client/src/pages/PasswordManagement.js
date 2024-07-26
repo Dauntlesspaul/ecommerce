@@ -360,7 +360,7 @@ const handleNewSubmit = async()=>{
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description"
               >
-                <DialogTitle sx={{padding: '14px 12px', fontSize: '17px'}} id="alert-dialog-title">{"Are you sure you want to logout ?"}</DialogTitle>
+                <DialogTitle sx={{padding: '25px 18px', fontSize: '18px'}} id="alert-dialog-title">{"Are you sure you want to logout ?"}</DialogTitle>
                 <DialogActions>
                   <Button
                     variant='contained'
