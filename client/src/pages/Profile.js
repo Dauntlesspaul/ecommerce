@@ -135,7 +135,7 @@ function Profile() {
             </div>
           </div>
           <div className="my-5 md:my-11 md:flex w-full md:w-11/12 xl:w-10/12">
-            <div className="px-3 md:px-0 flex-grow md:w-1/3 md:border md:border-slate-300">
+            <div className="px-3 md:px-0 flex-grow md:w-1/3 md:border md:border-slate-300 h-fit">
               <div className="w-full h-14 md:h-16 text-white flex items-center px-3 shadow-sm shadow-slate-300 bg-gray-800">
                 <span><FontAwesomeIcon icon="fa-regular fa-user" className="text-white text-xl" /></span>
                 <span className="ml-2 font-medium text-lg">Profile</span>
