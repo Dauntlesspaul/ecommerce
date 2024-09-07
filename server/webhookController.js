@@ -5,7 +5,6 @@ const Order = require('./model/Order');
 const endpointSecret = process.env.END_POINT_SECRET;
 
 exports.handleWebhook = async (req, res) => {
-    console.log('paulo')
   const sig = req.headers['stripe-signature'];
   let event;
 

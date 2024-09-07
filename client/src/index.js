@@ -31,8 +31,9 @@ import MyOrder from './pages/MyOrder.js';
 import ForgotPassword from './pages/ForgotPassword.js';
 import ChangePassword from './pages/ChangePassword.js';
 const root = ReactDOM.createRoot(document.getElementById('root'));
+const client_id = process.env.REACT_APP_CLIENT_ID;
 root.render(
-  <GoogleOAuthProvider clientId="357898211538-58erlvikuvbve56io6hgg1apgtqqm04g.apps.googleusercontent.com">
+  <GoogleOAuthProvider clientId={client_id}>
     <SkeletonTheme baseColor='#dee5e8' highlightColor='#fcfdfd'>
     <BrowserRouter>
     <ScrollToTop />
