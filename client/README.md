@@ -1,70 +1,52 @@
-# Getting Started with Create React App
+# 👟 Shoe Haven – Your Ultimate Shoe Destination
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**Shoe Haven** is a sleek, modern, and fully responsive e-commerce web application dedicated to showcasing and selling high-quality shoes. Designed for style and performance, Shoe Haven offers users an easy and engaging shopping experience with product filters, secure checkout, and admin product management.
 
-## Available Scripts
+🌐 [Live Demo](https://shoe-haven.vercel.app) 
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## 🛍️ Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- 🖼️ **Product Gallery** – Browse through a curated collection of shoes
+- 🔍 **Product Details Page** – View high-res images, descriptions, and prices
+- 🛒 **Add to Cart** – Seamless shopping cart functionality
+- 💳 **Checkout** – Secure and intuitive checkout process 
+- 🔎 **Search & Filter** – Quickly find products by name or category
+- 📱 **Fully Responsive** – Optimized for mobile, tablet, and desktop
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+## 🧱 Built With
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **Frontend**: React.js, TailwindCSS 
+- **Backend**: Express.js, Node.js
+- **Database**: MongoDB, AWS S3 Bucket
+- **Authentication**: Session-based 
+- **Payment Integration**: Stripe 
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 📸 Screenshots
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+> Replace links with your own images
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- **Home Page**  
+![Home](https://github.com/user-attachments/assets/227d478a-b49d-4556-bb9d-4a63ff373993)
+![Home](https://github.com/user-attachments/assets/998e3ab7-f058-426e-821e-676c329297ce)
 
-### `npm run eject`
+- **Product Details**  
+  ![Image](https://github.com/user-attachments/assets/b33fe77e-fc1a-40b7-a476-9266558b2f3a)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- **User Dashboard**  
+  ![Image](https://github.com/user-attachments/assets/0c8d9263-ece7-4542-b1c8-f7810d76b5fa)
+![Image](https://github.com/user-attachments/assets/1d0b160e-0138-4773-bc5d-c9b71fe2df5d)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- **Checkout Page**  
+![Image](https://github.com/user-attachments/assets/9dc554b4-b347-42f9-b4aa-219ef08deda5)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
