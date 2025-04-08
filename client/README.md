@@ -37,9 +37,9 @@
   ![Image](https://github.com/user-attachments/assets/b33fe77e-fc1a-40b7-a476-9266558b2f3a)
 
 - **Product Details**
-![Image](https://github.com/user-attachments/assets/9dc554b4-b347-42f9-b4aa-219ef08deda5)
+- ![Image](https://github.com/user-attachments/assets/0c8d9263-ece7-4542-b1c8-f7810d76b5fa)
 - **User Dashboard**  
-  ![Image](https://github.com/user-attachments/assets/0c8d9263-ece7-4542-b1c8-f7810d76b5fa)
+![Image](https://github.com/user-attachments/assets/9dc554b4-b347-42f9-b4aa-219ef08deda5)
 ![Image](https://github.com/user-attachments/assets/1d0b160e-0138-4773-bc5d-c9b71fe2df5d)
 
 - **Checkout Page**  
